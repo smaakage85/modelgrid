@@ -10,18 +10,18 @@
 #'   \item{model_grid}{Create (empty) model grid.}
 #'   \item{remove_model}{Remove model from model grid.}
 #'   \item{share_settings}{Set shared settings for all models within a model grid.}
-#'   \item{train}{Consolidate and train models in a model grid.}
 #' }
 #'
-#' @param custom_control list, any customizations to the shared 'trControl' argument.
-#' @param model_grid model_grid.
-#' @param model_name character, your name for a given model. Must be uniqued within a model grid.
-#' @param models list, list with the individual specifications for models in a model grid.
-#' @param resample_seed integer, this seed is used to create identical resamples across models in
+#' @param custom_control \code{list}, any customizations to the shared 'trControl' argument.
+#' @param model_grid \code{model_grid} with correct structure.
+#' @param model_name \code{character} with your name for a given model. Must be uniqued within a model grid.
+#' @param models \code{list} with the individual specifications for models in a model grid.
+#' @param resample_seed \code{integer} is used to create identical resamples across models in
 #' order to obtain a fair (and reproducible) comparison of the models.
-#' @param shared_settings list, settings that are shared across all models.
-#' @param train_all logical, if TRUE train all models. If set to FALSE train only models,
+#' @param shared_settings \code{list} settings that are shared across all models.
+#' @param train_all \code{logical} if TRUE train all models. If set to FALSE train only models,
 #' for which no fit already exists.
+#' @param x \code{model grid} with correct structure.
 #' @param ... Optional arguments.
 #'
 #' @rdname model_grid
@@ -176,8 +176,6 @@ remove_model <-
     return(model_grid)
   }
 
-#' @return \code{NULL}
-#'
 #' @rdname model_grid
 #' @method train model_grid
 #' @export

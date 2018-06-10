@@ -8,7 +8,7 @@
 \alias{edit_model}
 \alias{remove_model}
 \alias{train.model_grid}
-\title{Create a caret model grid}
+\title{Create and train a model grid}
 \usage{
 model_grid()
 
@@ -25,29 +25,28 @@ remove_model(model_grid, model_name)
 \method{train}{model_grid}(x, train_all = FALSE, resample_seed = 0)
 }
 \arguments{
-\item{model_grid}{model_grid.}
+\item{model_grid}{\code{model_grid} with correct structure.}
 
 \item{...}{Optional arguments.}
 
-\item{model_name}{character, your name for a given model.}
+\item{model_name}{\code{character} with your name for a given model. Must be uniqued within a model grid.}
 
-\item{custom_control}{list, any customizations to the shared 'trControl' argument.}
+\item{custom_control}{\code{list}, any customizations to the shared 'trControl' argument.}
 
-\item{shared_settings}{list, settings that are shared across all models.}
+\item{shared_settings}{\code{list} settings that are shared across all models.}
 
-\item{models}{list, list with model (specifications) from a model grid.}
+\item{models}{\code{list} with the individual specifications for models in a model grid.}
 
-\item{train_all}{logical, if TRUE train all models. If set to FALSE train only models,
+\item{x}{\code{model grid} with correct structure.}
+
+\item{train_all}{\code{logical} if TRUE train all models. If set to FALSE train only models,
 for which no fit already exists.}
 
-\item{resample_seed}{integer, this seed is used to create identical resamples across models in
-order to obtain a fair comparison of the models.}
-}
-\value{
-\code{NULL}
+\item{resample_seed}{\code{integer} is used to create identical resamples across models in
+order to obtain a fair (and reproducible) comparison of the models.}
 }
 \description{
-Train and compare multiple models with a caret model grid.
+Experiment with and train multiple models in a structured way with a model grid.
 }
 \details{
 \describe{
@@ -55,9 +54,8 @@ Train and compare multiple models with a caret model grid.
   \item{consolidate_models}{Consolidate models from shared settings and individual model
   specifications.}
   \item{edit_model}{Edit model within a model grid.}
-  \item{model_grid}{Create empty model grid.}
+  \item{model_grid}{Create (empty) model grid.}
   \item{remove_model}{Remove model from model grid.}
   \item{share_settings}{Set shared settings for all models within a model grid.}
-  \item{train}{Consolidate and train models in a model grid.}
 }
 }
