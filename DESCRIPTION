@@ -7,6 +7,8 @@ Depends: R (>= 3.5.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: caret
+Imports: caret,
+    purrr,
+    dplyr
 RoxygenNote: 6.0.1
 Suggests: testthat

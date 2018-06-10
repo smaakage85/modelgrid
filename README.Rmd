@@ -27,13 +27,13 @@ uses more or less the same api as
 be installed.
 
 ## Installation
-<!-- `scico` can be installed from CRAN with `install.packages('scico')`. If you want -->
-<!-- the development version then install directly from GitHub: -->
+`modelgrid` can be installed from CRAN with `install.packages('modelgrid')`. If you want
+the development version then install directly from GitHub:
 
-<!-- ```{r, eval=FALSE} -->
-<!-- # install.packages("devtools") -->
-<!-- devtools::install_github("thomasp85/scico") -->
-<!-- ``` -->
+```{r, eval=FALSE}
+# install.packages("devtools")
+devtools::install_github("smaakage85/modelgrid")
+```
 
 <!-- ## Palettes -->
 <!-- `scico` provides 17 different palettes, all of which are perceptually uniform  -->

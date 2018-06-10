@@ -10,12 +10,12 @@ test_that("Check if output is correct", {
 test_that("Addition of model configuration(s) to model grid", {
 
   # automatic naming
-  expect_equal(c("Model1", "Model2"),
+  expect_equal(c("Model0", "Model1"),
                model_grid() %>%
                  add_model(method = "rf") %>%
                  add_model(method = "nnet") %>%
                  magrittr::extract2("models") %>%
-                 names())
+                 names(.))
 
   # bogus model
   expect_error(model_grid() %>%
@@ -30,8 +30,8 @@ test_that("Editing of models within a model grid", {
   expect_equal(10,
                model_grid() %>%
                  add_model(method = "rf", tuneLength = 5) %>%
-                 edit_model(model_name = "Model1", tuneLength = 10) %>%
-                 magrittr::extract2(c("models", "Model1", "tuneLength")))
+                 edit_model(model_name = "Model0", tuneLength = 10) %>%
+                 magrittr::extract2(c("models", "Model0", "tuneLength")))
 }
 )
 

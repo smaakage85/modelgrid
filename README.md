@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-modelgrid <img src="man/figures/mglogo.png" align="right" />
-============================================================
+model grid <img src="man/figures/mglogo.png" align="right" />
+=============================================================
 
 [![Travis-CI Build Status](https://travis-ci.org/thomasp85/scico.svg?branch=master)](https://travis-ci.org/thomasp85/scico) <!-- [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/thomasp85/scico?branch=master&svg=true)](https://ci.appveyor.com/project/thomasp85/scico) --> <!-- [![CRAN_Release_Badge](http://www.r-pkg.org/badges/version-ago/scico)](https://CRAN.R-project.org/package=scico) --> <!-- [![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/scico)](https://CRAN.R-project.org/package=scico) -->
 
@@ -10,12 +10,13 @@ This is a small package to provide access to the colour palettes developed by Fa
 Installation
 ------------
 
-<!-- `scico` can be installed from CRAN with `install.packages('scico')`. If you want -->
-<!-- the development version then install directly from GitHub: -->
-<!-- ```{r, eval=FALSE} -->
-<!-- # install.packages("devtools") -->
-<!-- devtools::install_github("thomasp85/scico") -->
-<!-- ``` -->
+`modelgrid` can be installed from CRAN with `install.packages('modelgrid')`. If you want the development version then install directly from GitHub:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("smaakage85/modelgrid")
+```
+
 <!-- ## Palettes -->
 <!-- `scico` provides 17 different palettes, all of which are perceptually uniform  -->
 <!-- and colourblind safe. An overview can be had with the `scico_palette_show()` -->

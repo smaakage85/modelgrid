@@ -2,27 +2,27 @@
 % Please edit documentation in R/model_grid.R
 \name{model_grid}
 \alias{model_grid}
-\alias{set_shared_settings}
+\alias{share_settings}
 \alias{add_model}
 \alias{consolidate_models}
-\alias{xtrain}
 \alias{edit_model}
 \alias{remove_model}
+\alias{train.model_grid}
 \title{Create a caret model grid}
 \usage{
 model_grid()
 
-set_shared_settings(model_grid, ...)
+share_settings(model_grid, ...)
 
 add_model(model_grid, model_name = NULL, custom_control = NULL, ...)
 
 consolidate_models(shared_settings, models)
 
-xtrain(model_grid, train_all = FALSE, resample_seed = 1, ...)
-
 edit_model(model_grid, model_name, ...)
 
 remove_model(model_grid, model_name)
+
+\method{train}{model_grid}(x, train_all = FALSE, resample_seed = 0)
 }
 \arguments{
 \item{model_grid}{model_grid.}
@@ -43,6 +43,9 @@ for which no fit already exists.}
 \item{resample_seed}{integer, this seed is used to create identical resamples across models in
 order to obtain a fair comparison of the models.}
 }
+\value{
+\code{NULL}
+}
 \description{
 Train and compare multiple models with a caret model grid.
 }
@@ -54,7 +57,7 @@ Train and compare multiple models with a caret model grid.
   \item{edit_model}{Edit model within a model grid.}
   \item{model_grid}{Create empty model grid.}
   \item{remove_model}{Remove model from model grid.}
-  \item{set_shared_settings}{Set shared settings for all models within a model grid.}
-  \item{xtrain}{Consolidate and train model configurations from a model grid.}
+  \item{share_settings}{Set shared settings for all models within a model grid.}
+  \item{train}{Consolidate and train models in a model grid.}
 }
 }
