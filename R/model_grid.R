@@ -82,7 +82,7 @@ add_model <- function(model_grid, model_name = NULL, custom_control = NULL, ...)
     } else {
       model_name <-
         dplyr::setdiff(
-          paste0("Model", c(0, seq_along(mg$models))),
+          paste0("Model", c(0, seq_along(model_grid$models))),
           names(model_grid$models)
           ) %>%
         sort(.) %>%
