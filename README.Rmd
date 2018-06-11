@@ -12,22 +12,99 @@ knitr::opts_chunk$set(
 )
 ```
 
-# model grid <img src="man/figures/mglogo.png" align="right" />
+# modelgrid <img src="man/figures/mglogo.png" align="right" />
 
 [![Travis-CI Build Status](https://travis-ci.org/smaakage85/modelgrid.svg?branch=master)](https://travis-ci.org/smaakage85/modelgrid)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/smaakage85/modelgrid?branch=master&svg=true)](https://ci.appveyor.com/project/smaakage85/modelgrid)
-<!-- [![CRAN_Release_Badge](http://www.r-pkg.org/badges/version-ago/scico)](https://CRAN.R-project.org/package=scico) -->
-<!-- [![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/scico)](https://CRAN.R-project.org/package=scico) -->
 
-This is a small package to experiment with and train multiple models in a structured,
-but very flexible framework with the famous Caret API using a bare minimum of code.
+This is a small package to train multiple models in a structured
+framework using the famous Caret API and a bare minimum of code.
 
 ## Installation
-`modelgrid` can be installed from CRAN with `install.packages('modelgrid')`. If you want
+
+`modelgrid` can be installed from CRAN with `install.packages('modelgrid')` (soon). If you want
 the development version then install directly from GitHub:
 
 ```{r, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("smaakage85/modelgrid")
+```
+
+## Building your first model grid
+
+First, pre-allocate an empty model grid.
+
+```{r, message = FALSE}
+library(modelgrid)
+models <- model_grid()
+```
+
+A `model_grid` consists of three parts:
+
+* `shared_settings`: settings to be shared across models. Obvious choices could be the ones
+of target variable, features or resampling scheme.
+* `models`: settings that uniquely identifies the indvidual models.
+* `model_fits`: holds the fitted models, once the `model_grid` has been trained.
+
+
+Next, decide what settings you want to be shared by the models constituting the
+`model_grid`.
+
+```{r, message = FALSE}
+library(dplyr)
+library(caret)
+data(GermanCredit)
+
+models <-
+  models %>%
+  share_settings(
+    y = GermanCredit[["Class"]],
+    x = GermanCredit %>% dplyr::select(-Class),
+    metric = "ROC",
+    trControl = trainControl(
+      method = "cv",
+      number = 5,
+      summaryFunction = twoClassSummary,
+      classProbs = TRUE
+      )
+  )
+```
+
+Our first model candidate will be a simple Random Forest configuration.
+
+```{r}
+models <-
+  models %>%
+  add_model(
+    model_name = "Funky Forest",
+    method = "rf",
+    tuneLength = 5
+  )
+```
+
+Let us also give an eXtreme Gradient Boosting model a shot.
+
+```{r}
+models <-
+  models %>%
+  add_model(
+    model_name = "oO_XGB_Oo",
+    method = "xgbTree",
+    nthread = 8
+  )
+```
+
+That's it. We are all set to train our first very own model grid.
+
+```{r, message = FALSE}
+models <- models %>% train(.)
+```
+
+Visualize performance statistics.
+
+```{r}
+models$model_fits %>%
+  resamples(.) %>%
+  bwplot(.)
 ```
 

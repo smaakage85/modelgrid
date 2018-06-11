@@ -205,9 +205,11 @@ train.model_grid <- function(x, train_all = FALSE, resample_seed = 0) {
       message(paste0("[", Sys.time(),"] Training of '", .y, "' started."))
       # set seed before training to ensure the same resamples are used for all models.
       set.seed(resample_seed)
-      # train models.
-      models <- do.call(caret::train, .x)
+      # train model.
+      model <- do.call(caret::train, .x)
       message(paste0("[", Sys.time(),"] Training of '", .y, "' completed."))
+      # return trained model.
+      model
       }))
 
 
