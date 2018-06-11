@@ -25,7 +25,7 @@ remove_model(model_grid, model_name)
 \method{train}{model_grid}(x, train_all = FALSE, resample_seed = 0)
 }
 \arguments{
-\item{model_grid}{\code{model_grid} with correct structure.}
+\item{model_grid}{\code{model_grid}}
 
 \item{...}{Optional arguments.}
 
@@ -37,7 +37,7 @@ remove_model(model_grid, model_name)
 
 \item{models}{\code{list} with the individual specifications for models in a model grid.}
 
-\item{x}{\code{model grid} with correct structure.}
+\item{x}{\code{model grid}}
 
 \item{train_all}{\code{logical} if TRUE train all models. If set to FALSE train only models,
 for which no fit already exists.}
@@ -54,7 +54,7 @@ Experiment with and train multiple models in a structured way with a model grid.
   \item{consolidate_models}{Consolidate models from shared settings and individual model
   specifications.}
   \item{edit_model}{Edit model within a model grid.}
-  \item{model_grid}{Create (empty) model grid.}
+  \item{model_grid}{Pre-allocate (empty) model grid.}
   \item{remove_model}{Remove model from model grid.}
   \item{share_settings}{Set shared settings for all models within a model grid.}
 }

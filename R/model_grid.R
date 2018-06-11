@@ -7,13 +7,13 @@
 #'   \item{consolidate_models}{Consolidate models from shared settings and individual model
 #'   specifications.}
 #'   \item{edit_model}{Edit model within a model grid.}
-#'   \item{model_grid}{Create (empty) model grid.}
+#'   \item{model_grid}{Pre-allocate (empty) model grid.}
 #'   \item{remove_model}{Remove model from model grid.}
 #'   \item{share_settings}{Set shared settings for all models within a model grid.}
 #' }
 #'
 #' @param custom_control \code{list}, any customizations to the shared 'trControl' argument.
-#' @param model_grid \code{model_grid} with correct structure.
+#' @param model_grid \code{model_grid}
 #' @param model_name \code{character} with your name for a given model. Must be uniqued within a model grid.
 #' @param models \code{list} with the individual specifications for models in a model grid.
 #' @param resample_seed \code{integer} is used to create identical resamples across models in
@@ -21,7 +21,7 @@
 #' @param shared_settings \code{list} settings that are shared across all models.
 #' @param train_all \code{logical} if TRUE train all models. If set to FALSE train only models,
 #' for which no fit already exists.
-#' @param x \code{model grid} with correct structure.
+#' @param x \code{model grid}
 #' @param ... Optional arguments.
 #'
 #' @rdname model_grid
@@ -130,8 +130,7 @@ consolidate_models <- function(shared_settings, models) {
 
 #' @rdname model_grid
 #' @export
-edit_model <-
-  function(model_grid, model_name, ...) {
+edit_model <- function(model_grid, model_name, ...) {
 
     # check if model name exists in model grid
     if (!(model_name %in%  names(model_grid$models))) stop("model_name is not part of existing model_grid")
@@ -155,13 +154,13 @@ edit_model <-
     }
 
     # return model grid
-    return(model_grid)
+    model_grid
+
   }
 
 #' @rdname model_grid
 #' @export
-remove_model <-
-  function(model_grid, model_name) {
+remove_model <- function(model_grid, model_name) {
 
     # check if model name exists in model grid
     if (!(model_name %in% names(model_grid$models))) stop("model_name is not in the model_grid.")
@@ -173,7 +172,8 @@ remove_model <-
     model_grid$model_fits <- subset(model_grid$model_fits, names(model_grid$model_fits) != model_name)
 
     # return model grid
-    return(model_grid)
+    model_grid
+
   }
 
 #' @rdname model_grid
@@ -185,11 +185,10 @@ train.model_grid <- function(x, train_all = FALSE, resample_seed = 0) {
   if (is.null(x$models)) stop("No models to train.")
 
   # identify models without corresponding fits.
-  models_without_fit <- dplyr::setdiff(names(x$models), names(x$model_fits)
-    )
+  models_without_fit <- dplyr::setdiff(names(x$models), names(x$model_fits))
 
   # stop, if all models already have been equipped with a fit.
-  if (length(models_without_fit) == 0 & !train_all) stop("All models have already been trained. If you want to
+  if (length(models_without_fit) == 0 & !train_all) stop("It seems all models have already been trained. If you want to
                                                          train all of the models regardless, set train_all to TRUE.")
   # decide what models to train.
   if (length(models_without_fit) != 0 & !train_all) {
@@ -236,7 +235,7 @@ train.model_grid <- function(x, train_all = FALSE, resample_seed = 0) {
     x$model_fits <- append(x$model_fits, models_trained)
   }
 
-  # sort trained models in lexicographical order by name.
+  # sort trained models in lexicographical order by their names.
   x$model_fits <- x$model_fits[sort(names(x$model_fits))]
 
   # return model grid.

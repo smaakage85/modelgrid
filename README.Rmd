@@ -17,8 +17,8 @@ knitr::opts_chunk$set(
 [![Travis-CI Build Status](https://travis-ci.org/smaakage85/modelgrid.svg?branch=master)](https://travis-ci.org/smaakage85/modelgrid)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/smaakage85/modelgrid?branch=master&svg=true)](https://ci.appveyor.com/project/smaakage85/modelgrid)
 
-This is a small package to train multiple models in a structured
-framework using the famous Caret API and a bare minimum of code.
+This is a small package offering a structured framework for training multiple models 
+with the `caret` package and a bare minimum of code.
 
 ## Installation
 
@@ -41,8 +41,8 @@ models <- model_grid()
 
 A `model_grid` consists of three parts:
 
-* `shared_settings`: settings to be shared across models. Obvious choices could be the ones
-of target variable, features or resampling scheme.
+* `shared_settings`: settings to be shared across models. Obvious choices include
+the target variable, features or resampling scheme.
 * `models`: settings that uniquely identifies the indvidual models.
 * `model_fits`: holds the fitted models, once the `model_grid` has been trained.
 
@@ -59,7 +59,7 @@ models <-
   models %>%
   share_settings(
     y = GermanCredit[["Class"]],
-    x = GermanCredit %>% dplyr::select(-Class),
+    x = GermanCredit %>% select(-Class),
     metric = "ROC",
     trControl = trainControl(
       method = "cv",
