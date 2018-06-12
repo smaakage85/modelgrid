@@ -1,6 +1,6 @@
 Package: modelgrid
 Title: A Framework for Training Multiple Models Using the Caret Package
-Version: 0.0.0.9000
+Version: 0.0.0.9100
 Authors@R: person("Lars", "Kjeldgaard", email = "lars_kjeldgaard@hotmail.com", role = c("aut", "cre"))
 Description: This package enables the user to train multiple models in a structured framework drawing upon the caret package.
 Depends: R (>= 3.5.0)

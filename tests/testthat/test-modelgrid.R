@@ -51,7 +51,7 @@ test_that("Customizations to trControl are as expected", {
     # customizations to trControl using add_model().
     expect_equal("none",
     # consolidate model.
-    modelgrid::consolidate_models(mg$shared_settings, mg$models) %>%
+    modelgrid:::consolidate_models(mg$shared_settings, mg$models) %>%
                   # extract trainControl resampling "method".
                   magrittr::extract2(c("tester", "trControl", "method"))
     )
@@ -61,7 +61,7 @@ test_that("Customizations to trControl are as expected", {
     # customizations to trControl using edit_model().
     expect_equal("repeatedcv",
                   # consolidate model.
-                  modelgrid::consolidate_models(mg$shared_settings, mg$models) %>%
+                  modelgrid:::consolidate_models(mg$shared_settings, mg$models) %>%
                   # extract trainControl resampling "method".
                   magrittr::extract2(c("tester", "trControl", "method"))
                  )
