@@ -37,15 +37,16 @@ First, pre-allocate an empty model grid.
 ```{r, message = FALSE}
 library(modelgrid)
 models <- model_grid()
+
+models
 ```
 
-A `model_grid` consists of three parts:
+As you see, a `model_grid` consists of three parts:
 
 * `shared_settings`: settings to be shared across models. Obvious choices include
 the target variable, features or resampling scheme.
 * `models`: settings that uniquely identifies the indvidual models.
 * `model_fits`: holds the fitted models, once the `model_grid` has been trained.
-
 
 Next, decide what settings you want to be shared by the models constituting the
 `model_grid`.

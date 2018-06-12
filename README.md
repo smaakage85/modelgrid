@@ -25,9 +25,22 @@ First, pre-allocate an empty model grid.
 ``` r
 library(modelgrid)
 models <- model_grid()
+
+models
+#> $shared_settings
+#> NULL
+#> 
+#> $models
+#> NULL
+#> 
+#> $model_fits
+#> NULL
+#> 
+#> attr(,"class")
+#> [1] "model_grid"
 ```
 
-A `model_grid` consists of three parts:
+As you see, a `model_grid` consists of three parts:
 
 -   `shared_settings`: settings to be shared across models. Obvious choices include the target variable, features or resampling scheme.
 -   `models`: settings that uniquely identifies the indvidual models.
@@ -85,7 +98,7 @@ That's it. We are all set to train our first very own model grid.
 models <- models %>% train(.)
 ```
 
-Visualize performance statistics.
+Visualize performance statistics of final models.
 
 ``` r
 models$model_fits %>%
