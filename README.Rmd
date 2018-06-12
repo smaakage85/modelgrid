@@ -22,8 +22,8 @@ with the `caret` package and a bare minimum of code.
 
 ## Installation
 
-`modelgrid` can be installed from CRAN with `install.packages('modelgrid')` (soon). If you want
-the development version then install directly from GitHub:
+`modelgrid` can be installed from CRAN with `install.packages('modelgrid')` (soon). 
+If you want the development version then install directly from GitHub:
 
 ```{r, eval=FALSE}
 # install.packages("devtools")
@@ -100,7 +100,7 @@ That's it. We are all set to train our first very own model grid.
 models <- models %>% train(.)
 ```
 
-Visualize performance statistics.
+Visualize performance statistics of final models.
 
 ```{r}
 models$model_fits %>%
