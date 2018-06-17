@@ -1,6 +1,7 @@
 #' @export
 #' @importFrom magrittr %>%
-#' @importFrom caret train
 magrittr::`%>%`
+
+#' @importFrom caret train
 
 globalVariables(".")

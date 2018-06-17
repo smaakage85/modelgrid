@@ -2,60 +2,17 @@
 % Please edit documentation in R/model_grid.R
 \name{model_grid}
 \alias{model_grid}
-\alias{share_settings}
-\alias{add_model}
-\alias{consolidate_models}
-\alias{edit_model}
-\alias{remove_model}
-\alias{train.model_grid}
-\title{Create and train a model grid}
+\title{Pre-allocate an empty model grid}
 \usage{
 model_grid()
-
-share_settings(model_grid, ...)
-
-add_model(model_grid, model_name = NULL, custom_control = NULL, ...)
-
-consolidate_models(shared_settings, models)
-
-edit_model(model_grid, model_name, ...)
-
-remove_model(model_grid, model_name)
-
-\method{train}{model_grid}(x, train_all = FALSE, resample_seed = 0)
 }
-\arguments{
-\item{model_grid}{\code{model_grid}}
-
-\item{...}{Optional arguments.}
-
-\item{model_name}{\code{character} with your name for a given model. Must be uniqued within a model grid.}
-
-\item{custom_control}{\code{list}, any customizations to the shared 'trControl' argument.}
-
-\item{shared_settings}{\code{list} settings that are shared across all models.}
-
-\item{models}{\code{list} with the individual specifications for models in a model grid.}
-
-\item{x}{\code{model grid}}
-
-\item{train_all}{\code{logical} if TRUE train all models. If set to FALSE train only models,
-for which no fit already exists.}
-
-\item{resample_seed}{\code{integer} is used to create identical resamples across models in
-order to obtain a fair (and reproducible) comparison of the models.}
+\value{
+\code{model_grid}
 }
 \description{
-Experiment with and train multiple models in a structured way with a model grid.
+Pre-allocate an empty model grid
 }
-\details{
-\describe{
-  \item{add_model}{Add model to model grid.}
-  \item{consolidate_models}{Consolidate models from shared settings and individual model
-  specifications.}
-  \item{edit_model}{Edit model within a model grid.}
-  \item{model_grid}{Pre-allocate (empty) model grid.}
-  \item{remove_model}{Remove model from model grid.}
-  \item{share_settings}{Set shared settings for all models within a model grid.}
-}
+\examples{
+#Pre-allocate an empty model grid.
+model_grid()
 }
