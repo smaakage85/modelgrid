@@ -4,7 +4,7 @@
 #' @export
 #'
 #' @examples
-#' #Pre-allocate an empty model grid.
+#' # Pre-allocate an empty model grid.
 #' model_grid()
 model_grid <- function() {
 

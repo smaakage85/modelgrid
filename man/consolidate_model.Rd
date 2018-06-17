@@ -2,7 +2,7 @@
 % Please edit documentation in R/consolidate_model.R
 \name{consolidate_model}
 \alias{consolidate_model}
-\title{Consolidate model in model grid}
+\title{Consolidate model from model grid}
 \usage{
 consolidate_model(shared_settings, model)
 }

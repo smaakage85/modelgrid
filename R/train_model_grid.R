@@ -11,6 +11,41 @@
 #'
 #' @method train model_grid
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' # Load dataset.
+#' library(caret)
+#' data(GermanCredit)
+#'
+#' # Create model grid with a RF and XGB model.
+#' models <-
+#'   model_grid() %>%
+#'   share_settings(
+#'     y = GermanCredit[["Class"]],
+#'     x = GermanCredit %>% dplyr::select(-Class),
+#'     metric = "ROC",
+#'     trControl = caret::trainControl(
+#'       method = "cv",
+#'       number = 5,
+#'       summaryFunction = caret::twoClassSummary,
+#'       classProbs = TRUE
+#'     )
+#'   ) %>%
+#'   add_model(
+#'     model_name = "Funky Forest",
+#'     method = "rf",
+#'     tuneLength = 5
+#'     ) %>%
+#'   add_model(
+#'     model_name = "Big Boost",
+#'     method = "xgbTree",
+#'     nthread = 8
+#'     )
+#'
+#' # Train models in model grid.
+#' train(models)
+#' }
 train.model_grid <- function(mg, train_all = FALSE, resample_seed = 0) {
 
   # check inputs.

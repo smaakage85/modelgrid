@@ -21,3 +21,12 @@ specification.}
 \description{
 Modify an existing model in a model grid.
 }
+\examples{
+# Create model grid and add random forest model.
+mg <-
+  model_grid() \%>\%
+  add_model(model_name = "Random Forest Test", method = "rf", tuneLength = 5)
+
+# Edit tuning grid of the random forest model.
+edit_model(mg, model_name = "Random Forest Test", tuneLength = 10)
+}

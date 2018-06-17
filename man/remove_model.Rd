@@ -19,3 +19,15 @@ the model, you want to remove from a model grid.}
 Removes an individual model specification from a model grid. If the model has
 been trained, the fitted model will also be swiped.
 }
+\examples{
+# Pre-allocate empty model grid.
+mg <- model_grid()
+
+# Add 'random forest' model.
+mg <-
+  mg \%>\%
+  add_model(model_name = "Random Forest Test", method = "rf", tuneLength = 5)
+
+# Remove 'random forest' model again.
+remove_model(mg, model_name = "Random Forest Test")
+}

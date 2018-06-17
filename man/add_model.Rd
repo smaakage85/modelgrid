@@ -25,3 +25,12 @@ specification.
 \description{
 Define and add an individual model specification to an existing model grid.
 }
+\examples{
+# Pre-allocate empty model grid.
+mg <- model_grid()
+
+# Add 'random forest' model.
+mg <-
+  mg \%>\%
+  add_model(model_name = "Random Forest Test", method = "rf", tuneLength = 5)
+}

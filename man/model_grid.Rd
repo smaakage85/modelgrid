@@ -13,6 +13,6 @@ model_grid()
 Pre-allocate an empty model grid
 }
 \examples{
-#Pre-allocate an empty model grid.
+# Pre-allocate an empty model grid.
 model_grid()
 }

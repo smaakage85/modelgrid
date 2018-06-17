@@ -9,6 +9,18 @@
 #'
 #' @return \code{model_grid}
 #' @export
+#'
+#' @examples
+#' # Pre-allocate empty model grid.
+#' mg <- model_grid()
+#'
+#' # Add 'random forest' model.
+#' mg <-
+#'   mg %>%
+#'   add_model(model_name = "Random Forest Test", method = "rf", tuneLength = 5)
+#'
+#' # Remove 'random forest' model again.
+#' remove_model(mg, model_name = "Random Forest Test")
 remove_model <- function(model_grid, model_name) {
 
   # check if model name exists in model grid.

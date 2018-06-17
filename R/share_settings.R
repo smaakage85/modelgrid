@@ -11,6 +11,28 @@
 #'
 #' @return \code{model_grid} equipped with shared settings.
 #' @export
+#'
+#' @examples
+#' # Load data set.
+#' library(caret)
+#' data(GermanCredit)
+#'
+#' # Pre-allocate empty model grid.
+#' models <- model_grid()
+#'
+#' # Set shared settings of model grid.
+#' models %>%
+#'   share_settings(
+#'     y = GermanCredit[["Class"]],
+#'     x = GermanCredit %>% dplyr::select(-Class),
+#'     metric = "ROC",
+#'     trControl = caret::trainControl(
+#'       method = "cv",
+#'       number = 5,
+#'       summaryFunction = caret::twoClassSummary,
+#'       classProbs = TRUE
+#'       )
+#'   )
 share_settings <- function(model_grid, ...) {
 
   # check inputs.

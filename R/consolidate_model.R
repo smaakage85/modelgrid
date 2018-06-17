@@ -1,4 +1,4 @@
-#' Consolidate model in model grid
+#' Consolidate model from model grid
 #'
 #' Consolidate model settings from shared settings and model specific settings.
 #' In case of any overlap between the two, the model specific settings will

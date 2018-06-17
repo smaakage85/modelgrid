@@ -21,3 +21,25 @@ in the model specific configuration. In that case the model specific settings
 will apply. The 'trControl' parameter must be included in the shared
 settings.
 }
+\examples{
+# Load data set.
+library(caret)
+data(GermanCredit)
+
+# Pre-allocate empty model grid.
+models <- model_grid()
+
+# Set shared settings of model grid.
+models \%>\%
+  share_settings(
+    y = GermanCredit[["Class"]],
+    x = GermanCredit \%>\% dplyr::select(-Class),
+    metric = "ROC",
+    trControl = caret::trainControl(
+      method = "cv",
+      number = 5,
+      summaryFunction = caret::twoClassSummary,
+      classProbs = TRUE
+      )
+  )
+}
