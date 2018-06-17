@@ -9,7 +9,7 @@ Description: A minimal framework to construct and train multiple models using
     are first consolidated from the shared and the model specific settings and 
     hence can be trained using the 'train' function from 'caret'.
 URL: https://github.com/smaakage85/modelgrid
-Depends: R (>= 3.5.0)
+Depends: R (>= 3.4.2)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
