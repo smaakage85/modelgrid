@@ -15,7 +15,7 @@ test_that("the addition of two model configuration(s) to model grid is as expect
                  names(.))
   })
 
-test_that("model grid fails, when model type is not supported by caret", {
+test_that("error occurs, when model type is not supported by caret", {
   expect_error(modelgrid::model_grid() %>%
                  modelgrid::add_model(method = "bogus"))
   })
@@ -51,9 +51,9 @@ test_that("Customizations to trControl are as expected", {
     # customizations to trControl using add_model().
     expect_equal("none",
     # consolidate model.
-    modelgrid:::consolidate_models(mg$shared_settings, mg$models) %>%
+    modelgrid::consolidate_model(mg$shared_settings, mg$models$tester) %>%
                   # extract trainControl resampling "method".
-                  magrittr::extract2(c("tester", "trControl", "method"))
+                  magrittr::extract2(c("trControl", "method"))
     )
 
     # edit existing model.
@@ -61,9 +61,9 @@ test_that("Customizations to trControl are as expected", {
     # customizations to trControl using edit_model().
     expect_equal("repeatedcv",
                   # consolidate model.
-                  modelgrid:::consolidate_models(mg$shared_settings, mg$models) %>%
+                  modelgrid::consolidate_model(mg$shared_settings, mg$models$tester) %>%
                   # extract trainControl resampling "method".
-                  magrittr::extract2(c("tester", "trControl", "method"))
+                  magrittr::extract2(c("trControl", "method"))
                  )
     })
 

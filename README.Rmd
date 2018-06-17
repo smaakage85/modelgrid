@@ -98,7 +98,7 @@ models <-
 That's it. We are all set to train our first very own model grid.
 
 ```{r, message = FALSE}
-models <- models %>% train(.)
+models <- train(models)
 ```
 
 Visualize performance statistics of final models.

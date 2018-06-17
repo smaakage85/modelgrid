@@ -3,7 +3,7 @@
 S3method(train,model_grid)
 export("%>%")
 export(add_model)
-export(consolidate_models)
+export(consolidate_model)
 export(edit_model)
 export(model_grid)
 export(remove_model)

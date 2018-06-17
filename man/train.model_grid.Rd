@@ -4,10 +4,10 @@
 \alias{train.model_grid}
 \title{Train models within a model grid}
 \usage{
-\method{train}{model_grid}(x, train_all = FALSE, resample_seed = 0)
+\method{train}{model_grid}(mg, train_all = FALSE, resample_seed = 0)
 }
 \arguments{
-\item{x}{\code{model_grid}}
+\item{mg}{\code{model_grid}}
 
 \item{train_all}{\code{logical} if TRUE train all models. If set to FALSE train only models,
 for which no fit already exists.}
