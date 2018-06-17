@@ -3,7 +3,7 @@
 modelgrid <img src="man/figures/mglogo.png" align="right" />
 ============================================================
 
-[![Travis-CI Build Status](https://travis-ci.org/smaakage85/modelgrid.svg?branch=master)](https://travis-ci.org/smaakage85/modelgrid) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/smaakage85/modelgrid?branch=master&svg=true)](https://ci.appveyor.com/project/smaakage85/modelgrid)
+[![Travis-CI Build Status](https://travis-ci.org/smaakage85/modelgrid.svg?branch=master)](https://travis-ci.org/smaakage85/modelgrid) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/smaakage85/modelgrid?branch=master&svg=true)](https://ci.appveyor.com/project/smaakage85/modelgrid) [![Coverage Status](https://coveralls.io/repos/github/smaakage85/modelgrid/badge.svg?branch=master)](https://coveralls.io/github/smaakage85/modelgrid?branch=master)
 
 This is a small package offering a structured framework for training multiple models with the `caret` package and a bare minimum of code.
 
@@ -95,7 +95,7 @@ models <-
 That's it. We are all set to train our first very own model grid.
 
 ``` r
-models <- models %>% train(.)
+models <- train(models)
 ```
 
 Visualize performance statistics of final models.
