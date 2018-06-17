@@ -31,13 +31,14 @@ train.model_grid <- function(x, train_all = FALSE, resample_seed = 0) {
 
   # consolidate and train models.
   models_trained <-
-    consolidate_models(x[["shared_settings"]], fit_models) %>%
+    fit_models %>%
     purrr::map2(.x = ., .y = names(.), purrr::safely(.f = function(.x, .y) {
+      complete_model <- consolidate_models(x$shared_settings, .x)
       message(paste0("[", Sys.time(),"] Training of '", .y, "' started."))
       # set seed before training to ensure the same resamples are used for all models.
       set.seed(resample_seed)
       # train model.
-      model <- do.call(caret::train, .x)
+      model <- do.call(caret::train, complete_model)
       message(paste0("[", Sys.time(),"] Training of '", .y, "' completed."))
       # return trained model.
       model
