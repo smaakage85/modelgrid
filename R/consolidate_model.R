@@ -1,17 +1,29 @@
-#' Consolidate model from model grid
+#' Consolidate model and training settings in model grid
 #'
-#' Consolidate model settings from shared settings and model specific settings.
-#' In case of any overlap between the two, the model specific settings will
-#' apply.
+#' Consolidate model and training settings from the shared settings and the model
+#' specific settings. In case there is an overlap between the two, the model
+#' specific settings will apply.
 #'
-#' @param shared_settings \code{list} settings that are shared across all models.
+#' @param shared_settings \code{list} settings that are shared by all models.
 #' @param model \code{list} with the individual specifications of a model in a
 #' model grid.
 #'
-#' @return \code{list} with a complete model specification, that can be trained
-#' using the 'caret' package.
+#' @return \code{list} with a complete model and training specification, that
+#' can be trained using the 'caret' package.
 #'
 #' @export
+#'
+#' @examples
+#' mg <-
+#'   model_grid() %>%
+#'   share_settings(y = iris[["Species"]],
+#'                  x = iris %>% select(-Species),
+#'                  trControl = trainControl()) %>%
+#'   add_model("FunkyForest", method = "rf",
+#'             preProc = c("center", "scale", "pca"),
+#'             custom_control = list(preProcOptions = list(thresh = 0.8)))
+#'
+#' t <- consolidate_model(mg$shared_settings, mg$models$FunkyForest)
 consolidate_model <- function(shared_settings, model) {
 
   # modify 'trControl' parameter, if 'custom_control' parameter has been set.

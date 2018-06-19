@@ -1,10 +1,10 @@
-#' Add model specification to model grid
+#' Add a model specification to a model grid
 #'
 #' Define and add an individual model specification to an existing model grid.
 #'
 #' @param model_grid \code{model_grid}
-#' @param model_name \code{character} with your name for a given model. Must be
-#' unique within a model grid.
+#' @param model_name \code{character}, custom name for a given model. Must be
+#' unique within the model grid.
 #' @param custom_control \code{list}, any customizations to the shared
 #' 'trControl' argument.
 #' @param ... All (optional) individual settings that will apply to the
@@ -19,7 +19,7 @@
 #' # Pre-allocate empty model grid.
 #' mg <- model_grid()
 #'
-#' # Add 'random forest' model.
+#' # Add 'random forest' model spec.
 #' mg <-
 #'   mg %>%
 #'   add_model(model_name = "Random Forest Test", method = "rf", tuneLength = 5)
