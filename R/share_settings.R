@@ -1,10 +1,9 @@
 #' Set shared settings for a model grid
 #'
-#' Set shared settings for all models within a model grid. These settings will
-#' apply for a given model, unless the same settings have already been specified
-#' in the model specific configuration. In that case the model specific settings
-#' will apply. The 'trControl' parameter must be included in the shared
-#' settings.
+#' Set shared settings for all model (and training) configurations within a
+#' model grid. These settings will apply for a given model, unless the same
+#' settings have already been specified in the model specific configuration.
+#' The 'trControl' parameter must be included in the shared settings.
 #'
 #' @param model_grid \code{model_grid}
 #' @param ... Optional arguments.
@@ -24,12 +23,12 @@
 #' models %>%
 #'   share_settings(
 #'     y = GermanCredit[["Class"]],
-#'     x = GermanCredit %>% dplyr::select(-Class),
+#'     x = GermanCredit %>% select(-Class),
 #'     metric = "ROC",
-#'     trControl = caret::trainControl(
+#'     trControl = trainControl(
 #'       method = "cv",
 #'       number = 5,
-#'       summaryFunction = caret::twoClassSummary,
+#'       summaryFunction = twoClassSummary,
 #'       classProbs = TRUE
 #'       )
 #'   )

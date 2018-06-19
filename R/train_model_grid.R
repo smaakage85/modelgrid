@@ -1,13 +1,15 @@
 #' Train models within a model grid
 #'
-#' Consolidates all model configurations from a model grid and trains them with
-#' caret::train.
+#' Consolidates all model (and training) configurations from a model grid and
+#' trains them with the train function from the caret package.
 #'
 #' @param mg \code{model_grid}
-#' @param train_all \code{logical} if TRUE train all models. If set to FALSE train only models,
-#' for which no fit already exists.
-#' @param resample_seed \code{integer} is used to create identical resamples across models in
-#' order to obtain a fair (and reproducible) comparison of the models.
+#' @param train_all \code{logical} if set to TRUE, all models will be trained.
+#' If set to FALSE only models, for which no fit already exists, will be
+#' trained.
+#' @param resample_seed \code{integer} is used to create identical resamples
+#' across models in order to obtain a fair (and reproducible) comparison of
+#' the models.
 #'
 #' @method train model_grid
 #' @export
@@ -23,12 +25,12 @@
 #'   model_grid() %>%
 #'   share_settings(
 #'     y = GermanCredit[["Class"]],
-#'     x = GermanCredit %>% dplyr::select(-Class),
+#'     x = GermanCredit %>% select(-Class),
 #'     metric = "ROC",
-#'     trControl = caret::trainControl(
+#'     trControl = trainControl(
 #'       method = "cv",
 #'       number = 5,
-#'       summaryFunction = caret::twoClassSummary,
+#'       summaryFunction = twoClassSummary,
 #'       classProbs = TRUE
 #'     )
 #'   ) %>%
@@ -43,7 +45,7 @@
 #'     nthread = 8
 #'     )
 #'
-#' # Train models in model grid.
+#' # Train all model configurations in model grid.
 #' train(models)
 #' }
 train.model_grid <- function(mg, train_all = FALSE, resample_seed = 0) {

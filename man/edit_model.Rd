@@ -9,17 +9,17 @@ edit_model(model_grid, model_name, ...)
 \arguments{
 \item{model_grid}{\code{model_grid}}
 
-\item{model_name}{\code{character} with the unique name (set by the user) of
-the model, you want to modify.}
+\item{model_name}{\code{character}, the unique name (set by the user) of
+the model, that will be modified.}
 
 \item{...}{All the settings you want to modify for an existing model
-specification.}
+(and training) specification.}
 }
 \value{
 \code{model_grid}
 }
 \description{
-Modify an existing model in a model grid.
+Modify an existing model (and training) specification in a model grid.
 }
 \examples{
 # Create model grid and add random forest model.
@@ -27,6 +27,6 @@ mg <-
   model_grid() \%>\%
   add_model(model_name = "Random Forest Test", method = "rf", tuneLength = 5)
 
-# Edit tuning grid of the random forest model.
+# Edit size of tuning grid of the random forest model.
 edit_model(mg, model_name = "Random Forest Test", tuneLength = 10)
 }

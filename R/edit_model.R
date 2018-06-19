@@ -1,12 +1,12 @@
 #' Edit model within a model grid
 #'
-#' Modify an existing model in a model grid.
+#' Modify an existing model (and training) specification in a model grid.
 #'
 #' @param model_grid \code{model_grid}
-#' @param model_name \code{character} with the unique name (set by the user) of
-#' the model, you want to modify.
+#' @param model_name \code{character}, the unique name (set by the user) of
+#' the model, that will be modified.
 #' @param ... All the settings you want to modify for an existing model
-#' specification.
+#' (and training) specification.
 #'
 #' @return \code{model_grid}
 #' @export
@@ -17,7 +17,7 @@
 #'   model_grid() %>%
 #'   add_model(model_name = "Random Forest Test", method = "rf", tuneLength = 5)
 #'
-#' # Edit tuning grid of the random forest model.
+#' # Edit size of tuning grid of the random forest model.
 #' edit_model(mg, model_name = "Random Forest Test", tuneLength = 10)
 edit_model <- function(model_grid, model_name, ...) {
 

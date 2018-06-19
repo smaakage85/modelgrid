@@ -10,7 +10,7 @@ remove_model(model_grid, model_name)
 \item{model_grid}{\code{model_grid}}
 
 \item{model_name}{\code{character} with the unique name (set by the user) of
-the model, you want to remove from a model grid.}
+the model, which will be removed from a model grid.}
 }
 \value{
 \code{model_grid}
@@ -23,11 +23,11 @@ been trained, the fitted model will also be swiped.
 # Pre-allocate empty model grid.
 mg <- model_grid()
 
-# Add 'random forest' model.
+# Add random forest model.
 mg <-
   mg \%>\%
   add_model(model_name = "Random Forest Test", method = "rf", tuneLength = 5)
 
-# Remove 'random forest' model again.
+# Remove random forest model again.
 remove_model(mg, model_name = "Random Forest Test")
 }
