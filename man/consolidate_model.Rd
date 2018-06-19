@@ -2,22 +2,34 @@
 % Please edit documentation in R/consolidate_model.R
 \name{consolidate_model}
 \alias{consolidate_model}
-\title{Consolidate model from model grid}
+\title{Consolidate model and training settings in model grid}
 \usage{
 consolidate_model(shared_settings, model)
 }
 \arguments{
-\item{shared_settings}{\code{list} settings that are shared across all models.}
+\item{shared_settings}{\code{list} settings that are shared by all models.}
 
 \item{model}{\code{list} with the individual specifications of a model in a
 model grid.}
 }
 \value{
-\code{list} with a complete model specification, that can be trained
-using the 'caret' package.
+\code{list} with a complete model and training specification, that
+can be trained using the 'caret' package.
 }
 \description{
-Consolidate model settings from shared settings and model specific settings.
-In case of any overlap between the two, the model specific settings will
-apply.
+Consolidate model and training settings from the shared settings and the model
+specific settings. In case there is an overlap between the two, the model
+specific settings will apply.
+}
+\examples{
+mg <-
+  model_grid() \%>\%
+  share_settings(y = iris[["Species"]],
+                 x = iris \%>\% select(-Species),
+                 trControl = trainControl()) \%>\%
+  add_model("FunkyForest", method = "rf",
+            preProc = c("center", "scale", "pca"),
+            custom_control = list(preProcOptions = list(thresh = 0.8)))
+
+t <- consolidate_model(mg$shared_settings, mg$models$FunkyForest)
 }

@@ -2,15 +2,15 @@
 % Please edit documentation in R/add_model.R
 \name{add_model}
 \alias{add_model}
-\title{Add model specification to model grid}
+\title{Add a model specification to a model grid}
 \usage{
 add_model(model_grid, model_name = NULL, custom_control = NULL, ...)
 }
 \arguments{
 \item{model_grid}{\code{model_grid}}
 
-\item{model_name}{\code{character} with your name for a given model. Must be
-unique within a model grid.}
+\item{model_name}{\code{character}, custom name for a given model. Must be
+unique within the model grid.}
 
 \item{custom_control}{\code{list}, any customizations to the shared
 'trControl' argument.}
@@ -29,7 +29,7 @@ Define and add an individual model specification to an existing model grid.
 # Pre-allocate empty model grid.
 mg <- model_grid()
 
-# Add 'random forest' model.
+# Add 'random forest' model spec.
 mg <-
   mg \%>\%
   add_model(model_name = "Random Forest Test", method = "rf", tuneLength = 5)
