@@ -32,12 +32,12 @@ models <- model_grid()
 models \%>\%
   share_settings(
     y = GermanCredit[["Class"]],
-    x = GermanCredit \%>\% select(-Class),
+    x = GermanCredit \%>\% dplyr::select(-Class),
     metric = "ROC",
-    trControl = trainControl(
+    trControl = caret::trainControl(
       method = "cv",
       number = 5,
-      summaryFunction = twoClassSummary,
+      summaryFunction = caret::twoClassSummary,
       classProbs = TRUE
       )
   )

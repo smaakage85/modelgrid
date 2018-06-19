@@ -17,8 +17,8 @@
 #' mg <-
 #'   model_grid() %>%
 #'   share_settings(y = iris[["Species"]],
-#'                  x = iris %>% select(-Species),
-#'                  trControl = trainControl()) %>%
+#'                  x = iris %>% dplyr::select(-Species),
+#'                  trControl = caret::trainControl()) %>%
 #'   add_model("FunkyForest", method = "rf",
 #'             preProc = c("center", "scale", "pca"),
 #'             custom_control = list(preProcOptions = list(thresh = 0.8)))

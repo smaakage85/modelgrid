@@ -2,7 +2,7 @@ Package: modelgrid
 Title: A Framework for Training Multiple Models Using the Caret Package
 Version: 0.7.0.0
 Authors@R: person("Lars", "Kjeldgaard", email = "lars_kjeldgaard@hotmail.com", role = c("aut", "cre"))
-Description: A minimal framework to create and train multiple models using 
+Description: A minimal framework to create, manage and train multiple models using 
     the caret package. A model grid consists of two components: a set of 
     settings that are shared by all models, and specifications that apply only 
     to the indivual models. When the model grid is trained, model and training
