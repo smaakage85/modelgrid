@@ -10,7 +10,7 @@ Description: A minimal framework to create, manage and train multiple models usi
     settings into complete configurations. These configurations are trained
     with the famous 'train' function from the 'caret' package.
 URL: https://github.com/smaakage85/modelgrid
-Depends: R (>= 3.4.2)
+Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
