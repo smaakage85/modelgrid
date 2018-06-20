@@ -14,6 +14,7 @@
 #' @export
 #'
 #' @examples
+#' library(magrittr)
 #' mg <-
 #'   model_grid() %>%
 #'   share_settings(y = iris[["Species"]],
@@ -23,7 +24,7 @@
 #'             preProc = c("center", "scale", "pca"),
 #'             custom_control = list(preProcOptions = list(thresh = 0.8)))
 #'
-#' t <- consolidate_model(mg$shared_settings, mg$models$FunkyForest)
+#' consolidate_model(mg$shared_settings, mg$models$FunkyForest)
 consolidate_model <- function(shared_settings, model) {
 
   # modify 'trControl' parameter, if 'custom_control' parameter has been set.

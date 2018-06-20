@@ -24,9 +24,9 @@ First, pre-allocate an empty model grid.
 
 ``` r
 library(modelgrid)
-models <- model_grid()
+mg <- model_grid()
 
-models
+mg
 #> $shared_settings
 #> NULL
 #> 
@@ -40,7 +40,7 @@ models
 #> [1] "model_grid"
 ```
 
-As you see, a `model_grid` consists of three parts:
+As you see, a `model_grid` has three components:
 
 -   `shared_settings`: settings to be shared across models. Obvious choices include the target variable, features or resampling scheme.
 -   `models`: settings that uniquely identifies the indvidual models.
@@ -53,8 +53,8 @@ library(dplyr)
 library(caret)
 data(GermanCredit)
 
-models <-
-  models %>%
+mg <-
+  mg %>%
   share_settings(
     y = GermanCredit[["Class"]],
     x = GermanCredit %>% select(-Class),
@@ -71,8 +71,8 @@ models <-
 Our first model candidate will be a simple Random Forest configuration.
 
 ``` r
-models <-
-  models %>%
+mg <-
+  mg %>%
   add_model(
     model_name = "Funky Forest",
     method = "rf",
@@ -83,10 +83,10 @@ models <-
 Let us also give an eXtreme Gradient Boosting model a shot.
 
 ``` r
-models <-
-  models %>%
+mg <-
+  mg %>%
   add_model(
-    model_name = "oO_XGB_Oo",
+    model_name = "Big Boost",
     method = "xgbTree",
     nthread = 8
   )
@@ -95,15 +95,15 @@ models <-
 That's it. We are all set to train our first very own model grid.
 
 ``` r
-models <- train(models)
+mg <- train(mg)
 ```
 
 Visualize performance statistics of final models.
 
 ``` r
-models$model_fits %>%
+mg$model_fits %>%
   resamples(.) %>%
   bwplot(.)
 ```
 
-![](man/figures/README-unnamed-chunk-8-1.png)
+![](man/figures/README-performance_bwplot-1.png)

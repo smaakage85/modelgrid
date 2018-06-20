@@ -12,6 +12,7 @@
 #' @export
 #'
 #' @examples
+#' library(magrittr)
 #' # Create model grid and add random forest model.
 #' mg <-
 #'   model_grid() %>%

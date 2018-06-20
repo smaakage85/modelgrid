@@ -12,6 +12,8 @@
 #' @export
 #'
 #' @examples
+#' library(magrittr)
+#' 
 #' # Load data set.
 #' library(caret)
 #' data(GermanCredit)
@@ -25,6 +27,7 @@
 #'     y = GermanCredit[["Class"]],
 #'     x = GermanCredit %>% dplyr::select(-Class),
 #'     metric = "ROC",
+#'     preProc = c("center", "scale", "pca"),
 #'     trControl = caret::trainControl(
 #'       method = "cv",
 #'       number = 5,
