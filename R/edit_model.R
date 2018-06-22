@@ -24,6 +24,11 @@ edit_model <- function(model_grid, model_name, ...) {
   # check if model name exists in model grid.
   if (!(model_name %in%  names(model_grid$models))) stop("model_name is not part of existing model_grid")
 
+  # check validity of method (if provided).
+  if ("method" %in% names(list(...)) && !(list(...)[["method"]] %in% caret::modelLookup()$model)) {
+    stop("'method' is not supported by this version of caret.")
+  }
+  
   # list new model settings, including updated settings.
   new_settings  <- list(...)
 

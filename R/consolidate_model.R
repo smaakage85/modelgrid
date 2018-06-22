@@ -23,16 +23,19 @@
 #'             preProc = c("center", "scale", "pca"),
 #'             custom_control = list(preProcOptions = list(thresh = 0.8)))
 #'
-#' t <- consolidate_model(mg$shared_settings, mg$models$FunkyForest)
+#' consolidate_model(mg$shared_settings, mg$models$FunkyForest)
 consolidate_model <- function(shared_settings, model) {
 
-  # modify 'trControl' parameter, if 'custom_control' parameter has been set.
-  if ("custom_control" %in% names(model)) {
+  # modify 'trControl' argument, if 'custom_control' parameter has been set.
+  if (exists("custom_control", model) && exists("trControl", shared_settings)) {
+    
     shared_settings$trControl <-
-      append(model$custom_control, shared_settings$trControl[dplyr::setdiff(names(shared_settings$trControl),
-                                                                            names(model$custom_control))])
+      append(model$custom_control, shared_settings$trControl[
+        dplyr::setdiff(names(shared_settings$trControl), names(model$custom_control))])
+    
         # remove 'custom_control' parameter from final model specification.
         model <- model[dplyr::setdiff(names(model), "custom_control")]
+        
       }
 
   # append only relevant shared settings for a given model.
