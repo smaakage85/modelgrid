@@ -6,6 +6,7 @@
 #' @examples
 #' # Pre-allocate an empty model grid.
 #' model_grid()
+#' 
 model_grid <- function() {
 
   # create list with the structure of a 'model_grid'.

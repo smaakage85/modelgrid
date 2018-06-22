@@ -12,8 +12,9 @@ add_model(model_grid, model_name = NULL, custom_control = NULL, ...)
 \item{model_name}{\code{character}, custom name for a given model. Must be
 unique within the model grid.}
 
-\item{custom_control}{\code{list}, any customizations to the shared
-'trControl' argument.}
+\item{custom_control}{\code{list}, any customizations to subsettings of the 'trControl'
+component from the 'shared_settings' of the model grid (requires that 'trControl' has actually
+been provided as part of the shared settings).}
 
 \item{...}{All (optional) individual settings that will apply to the
 specific model.}

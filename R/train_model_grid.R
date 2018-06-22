@@ -9,10 +9,7 @@
 #' trained.
 #' @param resample_seed \code{integer} is used to create identical resamples
 #' across models in order to obtain a fair (and reproducible) comparison of
-#' the models.
-#'
-#' @method train model_grid
-#' @export
+#' the models. If set to NULL, seed will not be set (NOT advised).
 #'
 #' @examples
 #' \dontrun{
@@ -48,6 +45,7 @@
 #' # Train all model configurations in model grid.
 #' train(models)
 #' }
+#' @rdname model_grid
 train.model_grid <- function(mg, train_all = FALSE, resample_seed = 0) {
 
   # check inputs.
@@ -73,7 +71,7 @@ train.model_grid <- function(mg, train_all = FALSE, resample_seed = 0) {
       complete_model <- consolidate_model(mg$shared_settings, .x)
       message(paste0("[", Sys.time(),"] Training of '", .y, "' started."))
       # set seed before training to ensure the same resamples are used for all models.
-      set.seed(resample_seed)
+      if (!is.null(resample_seed)) {set.seed(resample_seed)}
       # train model.
       model <- do.call(caret::train, complete_model)
       message(paste0("[", Sys.time(),"] Training of '", .y, "' completed."))
