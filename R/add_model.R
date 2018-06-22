@@ -5,8 +5,9 @@
 #' @param model_grid \code{model_grid}
 #' @param model_name \code{character}, custom name for a given model. Must be
 #' unique within the model grid.
-#' @param custom_control \code{list}, any customizations to the shared
-#' 'trControl' argument.
+#' @param custom_control \code{list}, any customizations to subsettings of the 'trControl'
+#' component from the 'shared_settings' of the model grid (requires that 'trControl' has actually
+#' been provided as part of the shared settings).
 #' @param ... All (optional) individual settings that will apply to the
 #' specific model.
 #'
@@ -26,15 +27,32 @@
 add_model <- function(model_grid, model_name = NULL, custom_control = NULL, ...) {
 
   # check inputs.
-  if (!inherits(model_grid, "model_grid")) stop("The 'model_grid' argument inherit from the 'model_grid' class.")
-  if (!is.null(model_name) && model_name %in% names(model_grid$models))
+  if (is.null(custom_control) && length(list(...)) == 0) {
+    stop("No model specific settings were specied.")
+    }
+  
+  if (!inherits(model_grid, "model_grid")) {
+    stop("The 'model_grid' argument must inherit from the 'model_grid' class.")
+    }
+  
+  if (!is.null(model_name) && exists(model_name, model_grid["models"])) {
     stop("Model names should be unique. That name is already taken.")
-  if ("trControl" %in% names(list(...))) stop("Do not set the 'trControl' parameter directly. Please make any model specific
-                                              customizations to the shared 'trControl' parameter with the
-                                              'custom_control' parameter.")
-  if ("method" %in% names(list(...)) && !(list(...)[["method"]] %in% caret::modelLookup()$model)) {
+  }
+  
+  if (!is.null(custom_control) && exists("trControl", list(...))) {
+    stop("It is not meaningful to provide BOTH 'custom_control' and 'trControl' arguments in the
+          model specific configuration.")
+    }
+  
+  if (!is.null(custom_control) && exists("trControl", model_grid["shared_settings"])) {
+    stop("'custom_control' argument has been provided, but no 'trControl' component has been
+          specified within 'shared_settings'.") 
+  }
+  
+  if (exists("method", list(...)) && !(list(...)[["method"]] %in% caret::modelLookup()[["model"]])) {
     stop("'method' is not supported by this version of caret.")
   }
+  
 
   # set model name automatically, if it has not already been set.
   if (is.null(model_name)) {
