@@ -18,15 +18,17 @@ trained.}
 
 \item{resample_seed}{\code{integer} is used to create identical resamples
 across models in order to obtain a fair (and reproducible) comparison of
-the models.}
+the models. If set to NULL, seed will not be set (NOT advised).}
 }
 \value{
 \code{model_grid}
 }
 \description{
-Pre-allocate an empty model grid
+Pre-allocate an empty model grid. The model grid enables the user to
+construct, manage and train multiple caret models. Bla bla bla.
 
-Consolidates all model (and training) configurations from a model grid and
+The implementation of the train function for the 'model_grid' class consolidates
+all model (and training) configurations from a model grid and
 trains them with the train function from the caret package.
 }
 \examples{
@@ -66,4 +68,11 @@ models <-
 # Train all model configurations in model grid.
 train(models)
 }
+}
+\seealso{
+\code{\link{add_model}} for how to add a model to a model grid,
+ \code{\link{edit_model}} for how to edit an existing model within a model grid,
+ \code{\link{share_settings}} for how to define the shared settings of models 
+ within a model grid and
+ \code{\link{remove_model}} for how to remove a model from a model grid.
 }

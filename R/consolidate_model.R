@@ -1,15 +1,15 @@
-#' Consolidate model and training settings in model grid
+#' Consolidate model and training settings to a complete caret model specification
 #'
-#' Consolidate model and training settings from the shared settings and the model
-#' specific settings. In case there is an overlap between the two, the model
-#' specific settings will apply.
+#' Consolidate model and training settings from shared and model specific settings
+#' to a complete caret model specification. In case there is an overlap between 
+#' the two, the model specific settings will apply.
 #'
 #' @param shared_settings \code{list} settings that are shared by all models.
 #' @param model \code{list} with the individual specifications of a model in a
 #' model grid.
 #'
 #' @return \code{list} with a complete model and training specification, that
-#' can be trained using the 'caret' package.
+#' can be trained with caret.
 #'
 #' @export
 #'
