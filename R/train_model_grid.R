@@ -1,6 +1,7 @@
 #' Train models within a model grid
 #'
-#' Consolidates all model (and training) configurations from a model grid and
+#' The implementation of the train function for the 'model_grid' class consolidates
+#' all model (and training) configurations from a model grid and
 #' trains them with the train function from the caret package.
 #'
 #' @param mg \code{model_grid}

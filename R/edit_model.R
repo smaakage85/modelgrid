@@ -22,14 +22,14 @@
 edit_model <- function(model_grid, model_name, ...) {
 
   # check if model name exists in model grid.
-  if (!(model_name %in%  names(model_grid$models))) stop("model_name is not part of existing model_grid")
+  if (!exists(model_name, model_grid["models"])) stop("model_name is not part of existing model_grid")
 
-  # check validity of method (if provided).
-  if ("method" %in% names(list(...)) && !(list(...)[["method"]] %in% caret::modelLookup()$model)) {
+  # validate 'method' (if provided).
+  if (exists("method", list(...)) && !(list(...)[["method"]] %in% caret::modelLookup()$model)) {
     stop("'method' is not supported by this version of caret.")
   }
   
-  # list new model settings, including updated settings.
+  # create list wist settings to be updated.
   new_settings  <- list(...)
 
   # keep unchanged existing settings from model.
@@ -42,7 +42,7 @@ edit_model <- function(model_grid, model_name, ...) {
   model_grid$models[[model_name]] <- updated_model
 
   # delete model fits of existing model from model grid.
-  if (model_name %in% names(model_grid$model_fits)) {
+  if (exists(model_name, model_grid["model_fits"])) {
     model_grid$model_fits <- subset(model_grid$model_fits, names(model_grid$model_fits) != model_name)
     message("Model fit for ", model_name, " has been swiped.")
   }

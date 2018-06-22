@@ -2,7 +2,7 @@
 % Please edit documentation in R/consolidate_model.R
 \name{consolidate_model}
 \alias{consolidate_model}
-\title{Consolidate model and training settings in model grid}
+\title{Consolidate model and training settings to a complete caret model specification}
 \usage{
 consolidate_model(shared_settings, model)
 }
@@ -14,12 +14,12 @@ model grid.}
 }
 \value{
 \code{list} with a complete model and training specification, that
-can be trained using the 'caret' package.
+can be trained with caret.
 }
 \description{
-Consolidate model and training settings from the shared settings and the model
-specific settings. In case there is an overlap between the two, the model
-specific settings will apply.
+Consolidate model and training settings from shared and model specific settings
+to a complete caret model specification. In case there is an overlap between 
+the two, the model specific settings will apply.
 }
 \examples{
 mg <-
@@ -31,5 +31,5 @@ mg <-
             preProc = c("center", "scale", "pca"),
             custom_control = list(preProcOptions = list(thresh = 0.8)))
 
-t <- consolidate_model(mg$shared_settings, mg$models$FunkyForest)
+consolidate_model(mg$shared_settings, mg$models$FunkyForest)
 }
