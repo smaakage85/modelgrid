@@ -2,14 +2,16 @@ Package: modelgrid
 Title: A Framework for Creating, Managing and Training Multiple Caret Models
 Version: 0.9.0.0
 Authors@R: person("Lars", "Kjeldgaard", email = "lars_kjeldgaard@hotmail.com", role = c("aut", "cre"))
-Description: A minimalistic framework that facilitates the creation, management and training
-    of multiple 'caret' models. A model grid consists of two components: a set of settings that 
-    are shared by all models, and specifications that apply only to the individual models. When the
-    model grid is trained, model and training specifications are first consolidated from the shared
-    and the model specific settings into complete 'caret' model configurations. These configurations 
-    are then trained with the famous 'train' function from the 'caret' package.
+Description: A minimalistic but flexible framework that facilitates the creation,
+    management and training of multiple 'caret' models. A model grid consists of
+    two components: a set of settings that are shared by all models by default, 
+    and specifications that apply only to the individual models. When the model
+    grid is trained, model and training specifications are first consolidated
+    from the shared and the model specific settings into complete 'caret' model
+    configurations. These configurations are then trained with the famous 
+    'train' function from the 'caret' package.
 URL: https://github.com/smaakage85/modelgrid
-Depends: R (>= 3.4.2)
+Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

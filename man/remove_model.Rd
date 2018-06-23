@@ -9,7 +9,7 @@ remove_model(model_grid, model_name)
 \arguments{
 \item{model_grid}{\code{model_grid}}
 
-\item{model_name}{\code{character} with the unique name (set by the user) of
+\item{model_name}{\code{character}, the unique name (set by the user) of
 the model, which will be removed from a model grid.}
 }
 \value{

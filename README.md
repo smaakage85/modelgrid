@@ -10,7 +10,7 @@ This is a small package offering a minimalistic but flexible framework for creat
 Installation
 ------------
 
-`modelgrid` can be installed from CRAN with `install.packages('modelgrid')` (soon). If you want the development version then install directly from GitHub:
+`modelgrid` can be installed from CRAN with ~~`install.packages('modelgrid')`~~ (soon). If you want the development version then install directly from GitHub:
 
 ``` r
 # install.packages("devtools")

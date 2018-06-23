@@ -22,10 +22,10 @@ creating, managing and training multiple caret models with a bare minimum of cod
 
 ## Installation
 
-`modelgrid` can be installed from CRAN with `install.packages('modelgrid')` (soon). 
+`modelgrid` can be installed from CRAN with ~~`install.packages('modelgrid')`~~ (soon). 
 If you want the development version then install directly from GitHub:
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("smaakage85/modelgrid")
 ```
@@ -95,7 +95,7 @@ models <-
   )
 ```
 
-That's it. We are all set to train our first very own (extremely simple) 
+That's it. We are all set to train our first very own (extremely simple)
 model grid.
 
 ```{r, message = FALSE}

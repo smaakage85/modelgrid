@@ -1,6 +1,6 @@
 #' Train models within a model grid
 #'
-#' The implementation of the train function for the 'model_grid' class consolidates
+#' The S3 method of the train function for the 'model_grid' class consolidates
 #' all model (and training) configurations from a model grid and
 #' trains them with the train function from the caret package.
 #'
@@ -11,6 +11,9 @@
 #' @param resample_seed \code{integer} is used to create identical resamples
 #' across models in order to obtain a fair (and reproducible) comparison of
 #' the models. If set to NULL, seed will not be set (NOT advised).
+#'
+#' @method train model_grid
+#' @export
 #'
 #' @examples
 #' \dontrun{
