@@ -22,7 +22,7 @@
 edit_model <- function(model_grid, model_name, ...) {
 
   # check if model name exists in model grid.
-  if (!exists(model_name, model_grid["models"])) stop("model_name is not part of existing model_grid")
+  if (!exists(model_name, model_grid[["models"]])) stop("There is no model with that name within the model grid.")
 
   # check 'method' (if provided).
   if (exists("method", list(...)) && !(list(...)[["method"]] %in% caret::modelLookup()$model)) {

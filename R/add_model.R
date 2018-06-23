@@ -7,8 +7,8 @@
 #' @param model_name \code{character}, custom name for a given model. Must be
 #' unique within the model grid.
 #' @param custom_control \code{list}, any customizations to subsettings of the 'trControl'
-#' component from the 'shared_settings' of the model grid (requires that 'trControl' has actually
-#' been provided as part of the shared settings).
+#' component from the 'shared_settings' of the model grid (requires that 'trControl' has
+#' actually been provided as part of the shared settings).
 #' @param ... All (optional) individual settings (including training settings)
 #' that the user wishes to apply to the specific model.
 #'
