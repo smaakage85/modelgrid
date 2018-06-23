@@ -5,8 +5,8 @@
 #' @param model_grid \code{model_grid}
 #' @param model_name \code{character}, the unique name (set by the user) of
 #' the model, that will be modified.
-#' @param ... All the settings you want to modify for an existing model
-#' (and training) specification.
+#' @param ... All the model and training settings you want to modify for an
+#' existing model specification.
 #'
 #' @return \code{model_grid}
 #' @export
@@ -28,7 +28,7 @@ edit_model <- function(model_grid, model_name, ...) {
   if (exists("method", list(...)) && !(list(...)[["method"]] %in% caret::modelLookup()$model)) {
     stop("'method' is not supported by this version of caret.")
   }
-  
+
   # create list wist settings to be updated.
   new_settings  <- list(...)
 
