@@ -29,7 +29,7 @@ add_model <- function(model_grid, model_name = NULL, custom_control = NULL, ...)
 
   # check inputs.
   if (is.null(custom_control) && length(list(...)) == 0) {
-    stop("No model specific settings were specied.")
+    stop("No model specific settings were specified.")
     }
 
   if (!inherits(model_grid, "model_grid")) {
@@ -53,7 +53,6 @@ add_model <- function(model_grid, model_name = NULL, custom_control = NULL, ...)
   if (exists("method", list(...)) && !(list(...)[["method"]] %in% caret::modelLookup()[["model"]])) {
     stop("'method' is not supported by this version of caret.")
   }
-
 
   # set model name automatically, if it has not already been set.
   if (is.null(model_name)) {
