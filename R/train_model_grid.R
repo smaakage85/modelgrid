@@ -92,8 +92,10 @@ train.model_grid <- function(mg, train_all = FALSE, resample_seed = 0) {
     purrr::map_lgl(is.null)
 
   # throw message, if that is the case.
-  if (any(!is_ok)) cat("One or more models threw errors :(! Are you sure, all inputs are valid? \n Errors: \n",
-                       paste0(names(is_ok[!is_ok]), sep = "\n"))
+  if (any(!is_ok)) warning("One or more models threw errors :(! For this reason the fitted models are ",
+                           "saved with both a 'result' and an 'error' component. \n \nAre you sure, all ",
+                           "inputs are valid? \n\nThe following models were not trained succesfully: \n\n",
+                           paste0(names(is_ok[!is_ok]), sep = "\n"))
 
   # if all models are ok, only return 'result' component.
   if (all(is_ok)) {models_trained <- purrr::map(models_trained, "result")}
