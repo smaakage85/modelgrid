@@ -1,5 +1,7 @@
 ---
 title: "Introduction to modelgrid"
+author: "Lars Kjeldgaard"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to modelgrid}
@@ -12,12 +14,55 @@ library(magrittr)
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
-modelgrid 0.9.0 is now available on CRAN. modelgrid offers a minimalistic but still very flexible framework to create, manage and train a portfolio of `caret` models.  
+modelgrid 0.9.0 is now available on CRAN. modelgrid offers a minimalistic but 
+very flexible framework to create, manage and train a portfolio of caret models.
+Note, you should already be fairly familiar with the caret package before giving
+`modelgrid` a spin.
 
-This is the first official release, so below I describe the key concept behind `modelgrid` as well as the features of `modelgrid` divided into three main categories:
+This is the first official release, so below I describe the key concept behind 
+`modelgrid` as well as the features of `modelgrid` divided into three main 
+categories:
 
 * Creating a model grid
 * Training a model grid
 * Editing a model grid
 
-## Key concept of `model grid`
+## Key concept behind the model grid
+When facing a Machine Learning problem, you typically want to try out a lot of
+models in order to find out, what works and what does not. But how can we manage 
+these experiments in a structured, simple and transparent way? You guessed it - 
+by using the `modelgrid` package (and yes, I am familiar with the `caretEnsemble`
+package, but it was not exactly, what I was looking for). 
+
+A tuning grid consists of combinations of hyperparameters for a specific model. 
+A model grid is merely just an extension of that concept in the sense, that it
+consists of - potentially many - models, each with their own tuning grid. 
+Basically the model grid is built by providing a set of shared settings, that by
+default will apply to all models within the modelgrid, and settings for the
+individual models in the model grid.
+
+You can pre-allocate an empty model grid with the constructor function 
+`model_grid` and take a look at the structure.
+
+```{r, message = FALSE}
+library(modelgrid)
+mg <- model_grid()
+
+mg
+```
+
+An object belonging to the`model_grid` class has three components:
+
+* `shared_settings`: these are the settings of. Obvious choices include
+the target variable, features and resampling scheme.
+* `models`: settings that uniquely identifies the indvidual models.
+* `model_fits`: contains the fitted models, once the `model_grid` has been trained.
+
+`modelgrid` support both the 'x', 'y' interface to train, the formula interface and last but
+not least the new powerful`recipes` interface.
+
+## caretList
+
+`caretList` is a flexible function for fitting many different caret models, with the same resampling parameters, to the same dataset.  It returns a convenient `list` of caret objects which can later be passed to `caretEnsemble` and `caretStack`.  `caretList` has almost exactly the same arguments as `train` (from the caret package), with the exception that the `trControl` argument comes last.  It can handle both the formula interface and the explicit `x`, `y` interface to train.  As in caret, the formula interface introduces some overhead and the `x`, `y` interface is preferred.
+
+`caretEnsemble` has 2 arguments that can be used to specify which models to fit: `methodList` and `tuneList`.  `methodList` is a simple character vector of methods that will be fit with the default `train` parameters, while `tuneList` can be used to customize the call to each component model and will be discussed in more detail later.  First, lets build an example dataset (adapted from the caret vignette):
