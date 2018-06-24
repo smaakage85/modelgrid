@@ -27,13 +27,13 @@
 #'   model_grid() %>%
 #'   share_settings(
 #'     y = GermanCredit[["Class"]],
-#'     x = GermanCredit %>% dplyr::select(-Class),
+#'     x = GermanCredit %>% select(-Class),
 #'     metric = "ROC",
 #'     preProc = c("nzv", "center", "scale", "pca"),
-#'     trControl = caret::trainControl(
+#'     trControl = trainControl(
 #'       method = "cv",
 #'       number = 5,
-#'       summaryFunction = caret::twoClassSummary,
+#'       summaryFunction = twoClassSummary,
 #'       classProbs = TRUE
 #'     )
 #'   ) %>%
@@ -122,7 +122,7 @@ train.model_grid <- function(mg, train_all = FALSE, resample_seed = 123) {
     mg$model_fits <- append(mg$model_fits, models_trained)
   }
 
-  # sort trained models in lemgicographical order by their names.
+  # sort trained models in lexicographical order by their names.
   mg$model_fits <- mg$model_fits[sort(names(mg$model_fits))]
 
   # return model grid.

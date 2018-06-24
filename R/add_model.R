@@ -8,13 +8,12 @@
 #' unique within the model grid. If you do not provide a name, the model will be
 #' given a generic name - 'Model[int]'.
 #' @param custom_control \code{list}, any customizations to subsettings of the 'trControl'
-#' component from the 'shared_settings' of the model grid (given that 'trControl'
-#' parameter has actually is provided as part of the shared settings).
+#' component from the 'shared_settings' of the model grid (will only work if
+#' trControl' parameter has actually been set as part of the shared settings).
 #' @param ... All (optional) individual settings (including model training settings)
 #' that the user wishes to set for the new model.
 #'
-#' @return \code{model_grid} with an additional individual model
-#' specification.
+#' @return \code{model_grid} with an additional individual model specification.
 #'
 #' @export
 #'

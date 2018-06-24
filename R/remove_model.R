@@ -4,7 +4,7 @@
 #' been trained, the fitted model will also be swiped.
 #'
 #' @param model_grid \code{model_grid}
-#' @param model_name \code{character}, the unique name (set by the user) of
+#' @param model_name \code{character}, the unique name (as set by the user) of
 #' the model, which will be removed from a model grid.
 #'
 #' @return \code{model_grid}

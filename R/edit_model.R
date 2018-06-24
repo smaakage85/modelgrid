@@ -9,6 +9,7 @@
 #'  an existing model specification.
 #'
 #' @return \code{model_grid}
+#'
 #' @export
 #'
 #' @examples
@@ -49,7 +50,7 @@ edit_model <- function(model_grid, model_name, ...) {
   # replace/overwrite existing model with updated model.
   model_grid$models[[model_name]] <- updated_model
 
-  # delete model fits of existing model from model grid.
+  # delete model fit of existing model from model grid.
   if (exists(model_name, model_grid[["model_fits"]])) {
     model_grid <- remove_model(model_grid, model_name)
   }
