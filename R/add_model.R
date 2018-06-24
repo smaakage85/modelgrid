@@ -19,6 +19,7 @@
 #'
 #' @examples
 #' library(magrittr)
+#'
 #' # Pre-allocate empty model grid.
 #' mg <- model_grid()
 #'

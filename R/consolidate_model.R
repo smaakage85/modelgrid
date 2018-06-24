@@ -16,6 +16,9 @@
 #'
 #' @examples
 #' library(magrittr)
+#' library(dplyr)
+#' library(caret)
+#'
 #' # create model grid.
 #' mg <-
 #'   model_grid() %>%

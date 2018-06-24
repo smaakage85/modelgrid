@@ -19,17 +19,20 @@ can be trained with caret.
 }
 \description{
 Consolidate model (and model training) settings from shared and model specific
-settings to a complete caret model specification. In case there is an overlap
+settings to one complete caret model specification. In case there is an overlap
 between the two, the model specific settings will apply.
 }
 \examples{
 library(magrittr)
+library(dplyr)
+library(caret)
+
 # create model grid.
 mg <-
   model_grid() \%>\%
   share_settings(y = iris[["Species"]],
-                 x = iris \%>\% dplyr::select(-Species),
-                 trControl = caret::trainControl()) \%>\%
+                 x = iris \%>\% select(-Species),
+                 trControl = trainControl()) \%>\%
   add_model("FunkyForest", method = "rf",
             preProc = c("center", "scale", "pca"),
             custom_control = list(preProcOptions = list(thresh = 0.8)))

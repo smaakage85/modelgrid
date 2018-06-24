@@ -16,15 +16,14 @@ share_settings(model_grid, ...)
 }
 \description{
 Set shared settings for all model (and training) configurations within a
-model grid. These settings will apply for a given model, unless the same
-settings have already been specified in the model specific configuration. In
+model grid. These settings will apply for any given model, unless the same
+settings have already been specified in the model specific configurations. In
 that case, the model specific settings will apply.
 }
 \examples{
 library(magrittr)
-
-# Load data set.
 library(caret)
+library(dplyr)
 data(GermanCredit)
 
 # Pre-allocate empty model grid.
@@ -34,13 +33,13 @@ models <- model_grid()
 models \%>\%
   share_settings(
     y = GermanCredit[["Class"]],
-    x = GermanCredit \%>\% dplyr::select(-Class),
+    x = GermanCredit \%>\% select(-Class),
     metric = "ROC",
     preProc = c("center", "scale", "pca"),
-    trControl = caret::trainControl(
+    trControl = trainControl(
       method = "cv",
       number = 5,
-      summaryFunction = caret::twoClassSummary,
+      summaryFunction = twoClassSummary,
       classProbs = TRUE
       )
   )

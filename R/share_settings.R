@@ -13,9 +13,8 @@
 #'
 #' @examples
 #' library(magrittr)
-#'
-#' # Load data set.
 #' library(caret)
+#' library(dplyr)
 #' data(GermanCredit)
 #'
 #' # Pre-allocate empty model grid.

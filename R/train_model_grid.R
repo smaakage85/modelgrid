@@ -17,9 +17,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Load dataset and packages.
 #' library(caret)
 #' library(magrittr)
+#' library(dplyr)
 #' data(GermanCredit)
 #'
 #' # Create model grid with RF and XGB models.
