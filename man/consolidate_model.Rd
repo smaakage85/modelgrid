@@ -23,6 +23,7 @@ settings to a complete caret model specification. In case there is an overlap
 between the two, the model specific settings will apply.
 }
 \examples{
+library(magrittr)
 # create model grid.
 mg <-
   model_grid() \%>\%

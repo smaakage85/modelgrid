@@ -2,14 +2,14 @@
 % Please edit documentation in R/share_settings.R
 \name{share_settings}
 \alias{share_settings}
-\title{Set shared settings for a model grid}
+\title{Set shared settings of a model grid}
 \usage{
 share_settings(model_grid, ...)
 }
 \arguments{
 \item{model_grid}{\code{model_grid}}
 
-\item{...}{Optional arguments.}
+\item{...}{All optional shared settings.}
 }
 \value{
 \code{model_grid} equipped with shared settings.
@@ -17,10 +17,12 @@ share_settings(model_grid, ...)
 \description{
 Set shared settings for all model (and training) configurations within a
 model grid. These settings will apply for a given model, unless the same
-settings have already been specified in the model specific configuration.
-The 'trControl' parameter must be included in the shared settings.
+settings have already been specified in the model specific configuration. In
+that case, the model specific settings will apply.
 }
 \examples{
+library(magrittr)
+
 # Load data set.
 library(caret)
 data(GermanCredit)
@@ -34,6 +36,7 @@ models \%>\%
     y = GermanCredit[["Class"]],
     x = GermanCredit \%>\% dplyr::select(-Class),
     metric = "ROC",
+    preProc = c("center", "scale", "pca"),
     trControl = caret::trainControl(
       method = "cv",
       number = 5,

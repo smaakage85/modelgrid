@@ -23,7 +23,9 @@
 edit_model <- function(model_grid, model_name, ...) {
 
   # check if the model_grid is in fact a model_grid.
-  if (!inherits(model_grid, "model_grid")) stop("The 'model_grid' must inherit from the 'model_grid' class.")
+  if (!inherits(model_grid, "model_grid")) {
+    stop("The 'model_grid' must inherit from the 'model_grid' class.")
+  }
 
   # check if a model with that name exists in model grid.
   if (!exists(model_name, model_grid[["models"]])) {
@@ -48,7 +50,7 @@ edit_model <- function(model_grid, model_name, ...) {
   model_grid$models[[model_name]] <- updated_model
 
   # delete model fits of existing model from model grid.
-  if (exists(model_name, model_grid["model_fits"])) {
+  if (exists(model_name, model_grid[["model_fits"]])) {
     model_grid <- remove_model(model_grid, model_name)
   }
 

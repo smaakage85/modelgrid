@@ -17,7 +17,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Load dataset.
+#' # Load dataset and packages.
 #' library(caret)
 #' library(magrittr)
 #' data(GermanCredit)
@@ -58,20 +58,22 @@
 #' train(mg)
 #' }
 #' @rdname model_grid
-train.model_grid <- function(mg, train_all = FALSE, resample_seed = 0) {
+train.model_grid <- function(mg, train_all = FALSE, resample_seed = 123) {
 
   # check inputs.
-  if (is.null(mg$models)) {
-    message("No models to train.")
-    return(mg)
+  if (length(mg$models) == 0) {
+    stop("No models to train.")
   }
 
   # identify models without corresponding fits.
   models_without_fit <- dplyr::setdiff(names(mg$models), names(mg$model_fits))
 
   # stop, if all models already have been equipped with a fit.
-  if (length(models_without_fit) == 0 & !train_all) stop("It seems all models have already been trained. If you want to
-                                                         train all of the models regardless, set train_all to TRUE.")
+  if (length(models_without_fit) == 0 & !train_all) {
+    stop("It seems all models have already been trained. If you want to ",
+         "train all of the models regardless, set train_all to TRUE.")
+  }
+
   # decide what models to train.
   if (length(models_without_fit) != 0 & !train_all) {
     fit_models <-mg$models[models_without_fit]
@@ -79,7 +81,7 @@ train.model_grid <- function(mg, train_all = FALSE, resample_seed = 0) {
     fit_models <- mg$models
   }
 
-  # consolidate and train models.
+  # consolidate and train models from model grid.
   models_trained <-
     fit_models %>%
     purrr::map2(.x = ., .y = names(.), purrr::safely(.f = function(.x, .y) {
@@ -102,7 +104,7 @@ train.model_grid <- function(mg, train_all = FALSE, resample_seed = 0) {
     magrittr::extract2("error") %>%
     purrr::map_lgl(is.null)
 
-  # throw message, if that is the case.
+  # throw warning, if that is the case.
   if (any(!is_ok)) warning("One or more models threw errors :(! For this reason the fitted models are ",
                            "saved with both a 'result' and an 'error' component. \n \nAre you sure, all ",
                            "inputs are valid? \n\nThe following models were not trained succesfully: \n\n",

@@ -29,6 +29,7 @@ Define and add an individual model (and model training) specification to an
 existing model grid.
 }
 \examples{
+library(magrittr)
 # Pre-allocate empty model grid.
 mg <- model_grid()
 

@@ -22,6 +22,7 @@ an existing model specification.}
 Modify an existing model (and training) specification in a model grid.
 }
 \examples{
+library(magrittr)
 # Create model grid and add random forest model.
 mg <-
   model_grid() \%>\%

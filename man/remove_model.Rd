@@ -20,6 +20,7 @@ Removes an individual model specification from a model grid. If the model has
 been trained, the fitted model will also be swiped.
 }
 \examples{
+library(magrittr)
 # Pre-allocate empty model grid.
 mg <- model_grid()
 

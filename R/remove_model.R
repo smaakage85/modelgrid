@@ -25,7 +25,9 @@
 remove_model <- function(model_grid, model_name) {
 
   # check inputs.
-  if (!inherits(model_grid, "model_grid")) stop("The 'model_grid' must inherit from the 'model_grid' class.")
+  if (!inherits(model_grid, "model_grid")) {
+    stop("The 'model_grid' must inherit from the 'model_grid' class.")
+  }
 
   if (length(model_grid$models) == 0) {
     stop("no model specifications have been defined within the model grid.")

@@ -7,13 +7,13 @@
 \usage{
 model_grid()
 
-\method{train}{model_grid}(mg, train_all = FALSE, resample_seed = 0)
+\method{train}{model_grid}(mg, train_all = FALSE, resample_seed = 123)
 }
 \arguments{
 \item{mg}{\code{model_grid}}
 
 \item{train_all}{\code{logical} if set to TRUE, all models will be trained.
-If set to FALSE only models, for which no fit already exists, will be
+If set to FALSE, only models, for which no fit already exists, will be
 trained.}
 
 \item{resample_seed}{\code{integer} is used to create identical resamples
@@ -39,17 +39,19 @@ models.
 model_grid()
 
 \dontrun{
-# Load dataset.
+# Load dataset and packages.
 library(caret)
+library(magrittr)
 data(GermanCredit)
 
-# Create model grid with a RF and XGB model.
-models <-
+# Create model grid with RF and XGB models.
+mg <-
   model_grid() \%>\%
   share_settings(
     y = GermanCredit[["Class"]],
     x = GermanCredit \%>\% dplyr::select(-Class),
     metric = "ROC",
+    preProc = c("nzv", "center", "scale", "pca"),
     trControl = caret::trainControl(
       method = "cv",
       number = 5,
@@ -60,16 +62,22 @@ models <-
   add_model(
     model_name = "Funky Forest",
     method = "rf",
-    tuneLength = 5
+    tuneLength = 5,
+    preProc = c("center", "scale")
     ) \%>\%
   add_model(
     model_name = "Big Boost",
     method = "xgbTree",
     nthread = 8
-    )
+    ) \%>\%
+  add_model(
+    model_name = "Big Boost PCA_20",
+    method = "xgbTree",
+    custom_control = list(preProcOptions = list(pcaComp = 20))
+  )
 
 # Train all model configurations in model grid.
-train(models)
+train(mg)
 }
 }
 \seealso{

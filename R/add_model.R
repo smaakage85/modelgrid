@@ -42,7 +42,7 @@ add_model <- function(model_grid, model_name = NULL, custom_control = NULL, ...)
     stop("Model names should be unique. That name is already taken.")
   }
 
-  if (!is.null(custom_control) && exists("trControl", model_grid["shared_settings"])) {
+  if (!is.null(custom_control) && !exists("trControl", model_grid[["shared_settings"]])) {
     warning("'custom_control' argument has been set, but no 'trControl' ",
             "component has been specified within 'shared_settings'. This model ",
             "specification will fail to compile, if you do not provide the ",
