@@ -9,21 +9,24 @@ add_model(model_grid, model_name = NULL, custom_control = NULL, ...)
 \arguments{
 \item{model_grid}{\code{model_grid}}
 
-\item{model_name}{\code{character}, custom name for a given model. Must be
-unique within the model grid.}
+\item{model_name}{\code{character}, your custom name for a given model. Must be
+unique within the model grid. If you do not provide a name, the model will be
+given a generic name - 'Model[int]'.}
 
-\item{custom_control}{\code{list}, any customizations to the shared
-'trControl' argument.}
+\item{custom_control}{\code{list}, any customizations to subsettings of the 'trControl'
+component from the 'shared_settings' of the model grid (given that 'trControl'
+parameter has actually is provided as part of the shared settings).}
 
-\item{...}{All (optional) individual settings that will apply to the
-specific model.}
+\item{...}{All (optional) individual settings (including model training settings)
+that the user wishes to set for the new model.}
 }
 \value{
 \code{model_grid} with an additional individual model
 specification.
 }
 \description{
-Define and add an individual model specification to an existing model grid.
+Define and add an individual model (and model training) specification to an
+existing model grid.
 }
 \examples{
 # Pre-allocate empty model grid.

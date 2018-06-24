@@ -9,11 +9,11 @@ edit_model(model_grid, model_name, ...)
 \arguments{
 \item{model_grid}{\code{model_grid}}
 
-\item{model_name}{\code{character}, the unique name (set by the user) of
-the model, that will be modified.}
+\item{model_name}{\code{character}, the unique name (as set by the user) of
+the model, that should be modified.}
 
-\item{...}{All the settings you want to modify for an existing model
-(and training) specification.}
+\item{...}{All the model (and model training) settings you want to modify for
+an existing model specification.}
 }
 \value{
 \code{model_grid}

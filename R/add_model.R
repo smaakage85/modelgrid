@@ -1,14 +1,17 @@
 #' Add a model specification to a model grid
 #'
-#' Define and add an individual model specification to an existing model grid.
+#' Define and add an individual model (and model training) specification to an
+#' existing model grid.
 #'
 #' @param model_grid \code{model_grid}
-#' @param model_name \code{character}, custom name for a given model. Must be
-#' unique within the model grid.
-#' @param custom_control \code{list}, any customizations to the shared
-#' 'trControl' argument.
-#' @param ... All (optional) individual settings that will apply to the
-#' specific model.
+#' @param model_name \code{character}, your custom name for a given model. Must be
+#' unique within the model grid. If you do not provide a name, the model will be
+#' given a generic name - 'Model[int]'.
+#' @param custom_control \code{list}, any customizations to subsettings of the 'trControl'
+#' component from the 'shared_settings' of the model grid (given that 'trControl'
+#' parameter has actually is provided as part of the shared settings).
+#' @param ... All (optional) individual settings (including model training settings)
+#' that the user wishes to set for the new model.
 #'
 #' @return \code{model_grid} with an additional individual model
 #' specification.
@@ -27,20 +30,38 @@
 add_model <- function(model_grid, model_name = NULL, custom_control = NULL, ...) {
 
   # check inputs.
-  if (!inherits(model_grid, "model_grid")) stop("The 'model_grid' argument inherit from the 'model_grid' class.")
-  if (!is.null(model_name) && model_name %in% names(model_grid$models))
+  if (is.null(custom_control) && length(list(...)) == 0) {
+    stop("No model specific settings were given.")
+    }
+
+  if (!inherits(model_grid, "model_grid")) {
+    stop("The 'model_grid' argument must inherit from the 'model_grid' class.")
+    }
+
+  if (!is.null(model_name) && exists(model_name, model_grid[["models"]])) {
     stop("Model names should be unique. That name is already taken.")
-  if ("trControl" %in% names(list(...))) stop("Do not set the 'trControl' parameter directly. Please make any model specific
-                                              customizations to the shared 'trControl' parameter with the
-                                              'custom_control' parameter.")
-  if ("method" %in% names(list(...)) && !(list(...)[["method"]] %in% caret::modelLookup()$model)) {
+  }
+
+  if (!is.null(custom_control) && exists("trControl", model_grid["shared_settings"])) {
+    warning("'custom_control' argument has been set, but no 'trControl' ",
+            "component has been specified within 'shared_settings'. This model ",
+            "specification will fail to compile, if you do not provide the ",
+            "'trControl' component to the shared settings of the model grid.")
+  }
+
+  if (!is.null(custom_control) && exists("trControl", list(...))) {
+    stop("It is not meaningful to provide BOTH 'custom_control' and 'trControl' ",
+         "arguments in the model specific configuration.")
+    }
+
+  if (exists("method", list(...)) && !(list(...)[["method"]] %in% caret::modelLookup()[["model"]])) {
     stop("'method' is not supported by this version of caret.")
   }
 
   # set model name automatically, if it has not already been set.
   if (is.null(model_name)) {
     if (is.null(model_grid$models)) {
-      # start indexing from zero.
+      # indexing starts from zero.
       model_name <- "Model0"
     } else {
       model_name <-
@@ -53,10 +74,10 @@ add_model <- function(model_grid, model_name = NULL, custom_control = NULL, ...)
     }
   }
 
-  # add model to grid.
+  # add model to model grid.
   model_grid[["models"]][[model_name]] <- list(...)
 
-  # make any customizations to 'trControl'.
+  # prepare any customizations to shared 'trControl'.
   if (!is.null(custom_control)) {
     model_grid[["models"]][[model_name]][["custom_control"]] <- custom_control
   }

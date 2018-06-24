@@ -39,10 +39,14 @@ share_settings <- function(model_grid, ...) {
 
   # check inputs.
   if (!inherits(model_grid, "model_grid")) stop("The 'model_grid' must inherit from the 'model_grid' class.")
-  if (!"trControl" %in% names(list(...))) stop("'trControl' parameter has not been set (as required).")
-  if (!is.null(model_grid$model_fits)) {
-    model_grid$model_fits <- NULL
+  if (!"trControl" %in% names(list(...))) warning("'trControl' parameter has not been set. It is often useful to set the 'trControl' argument as a shared setting.")
+  if (length(model_grid$model_fits) != 0) {
+    model_grid$model_fits <- list()
     message("All model fits have been swiped due to shared settings being updated.")
+  }
+  # check validity of method (if provided).
+  if ("method" %in% names(list(...)) && !(list(...)[["method"]] %in% caret::modelLookup()$model)) {
+    stop("'method' is not supported by this version of caret.")
   }
 
   # apply shared settings of the model grid.

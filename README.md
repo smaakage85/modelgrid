@@ -5,12 +5,12 @@ modelgrid <img src="man/figures/mglogo.png" align="right" />
 
 [![Travis-CI Build Status](https://travis-ci.org/smaakage85/modelgrid.svg?branch=master)](https://travis-ci.org/smaakage85/modelgrid) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/smaakage85/modelgrid?branch=master&svg=true)](https://ci.appveyor.com/project/smaakage85/modelgrid)
 
-This is a small package offering a structured framework for training multiple models with the `caret` package and a bare minimum of code.
+This is a small package offering a minimalistic but flexible framework for creating, managing and training multiple caret models with a bare minimum of code.
 
 Installation
 ------------
 
-`modelgrid` can be installed from CRAN with `install.packages('modelgrid')` (soon). If you want the development version then install directly from GitHub:
+`modelgrid` can be installed from CRAN with ~~`install.packages('modelgrid')`~~ (soon). If you want the development version then install directly from GitHub:
 
 ``` r
 # install.packages("devtools")
@@ -20,7 +20,7 @@ devtools::install_github("smaakage85/modelgrid")
 Building your first model grid
 ------------------------------
 
-First, pre-allocate an empty model grid.
+First, pre-allocate an empty model grid with the constructor function `model_grid`.
 
 ``` r
 library(modelgrid)
@@ -42,7 +42,7 @@ mg
 
 As you see, a `model_grid` has three components:
 
--   `shared_settings`: settings to be shared across models. Obvious choices include the target variable, features or resampling scheme.
+-   `shared_settings`: settings to be shared across models. Obvious choices include the target variable, features and resampling scheme.
 -   `models`: settings that uniquely identifies the indvidual models.
 -   `model_fits`: holds the fitted models, once the `model_grid` has been trained.
 
@@ -92,7 +92,7 @@ mg <-
   )
 ```
 
-That's it. We are all set to train our first very own model grid.
+That's it. We are all set to train our first very own (extremely simple) model grid.
 
 ``` r
 mg <- train(mg)
@@ -107,3 +107,5 @@ mg$model_fits %>%
 ```
 
 ![](man/figures/README-performance_bwplot-1.png)
+
+You want to know more about all of the exciting features of the `model_grid`? Take a look at the vignette (:

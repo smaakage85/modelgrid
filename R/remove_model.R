@@ -4,7 +4,7 @@
 #' been trained, the fitted model will also be swiped.
 #'
 #' @param model_grid \code{model_grid}
-#' @param model_name \code{character} with the unique name (set by the user) of
+#' @param model_name \code{character}, the unique name (set by the user) of
 #' the model, which will be removed from a model grid.
 #'
 #' @return \code{model_grid}
@@ -24,14 +24,28 @@
 #' remove_model(mg, model_name = "Random Forest Test")
 remove_model <- function(model_grid, model_name) {
 
-  # check if model name exists in model grid.
-  if (!(model_name %in% names(model_grid$models))) stop("model_name is not in the model_grid.")
+  # check inputs.
+  if (!inherits(model_grid, "model_grid")) stop("The 'model_grid' must inherit from the 'model_grid' class.")
 
-  # delete model from models.
-  model_grid$models <- subset(model_grid$models, names(model_grid$models) != model_name)
+  if (length(model_grid$models) == 0) {
+    stop("no model specifications have been defined within the model grid.")
+    }
 
-  # delete model fits of existing model from model grid.
-  model_grid$model_fits <- subset(model_grid$model_fits, names(model_grid$model_fits) != model_name)
+  # check if a model with that name exists in the model grid.
+  if (!(exists(model_name, model_grid[["models"]]))) {
+    stop("there is no model with that name in the model_grid.")
+  }
+
+  # delete model specification.
+  model_grid$models <-
+    subset(model_grid$models, names(model_grid$models) != model_name)
+
+  # delete any existing model fit.
+  if (exists(model_name, model_grid[["model_fits"]])) {
+    model_grid$model_fits <-
+      subset(model_grid$model_fits, names(model_grid$model_fits) != model_name)
+    message("Model fit for ", model_name, " has been swiped.")
+  }
 
   # return model grid.
   model_grid
