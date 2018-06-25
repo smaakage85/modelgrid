@@ -22,6 +22,8 @@ the models. If set to NULL, seed will not be set (NOT advised).}
 }
 \value{
 \code{model_grid}
+
+\code{model_grid} equipped with fitted models.
 }
 \description{
 Constructor function that pre-allocates an empty model grid.

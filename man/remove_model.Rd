@@ -17,7 +17,7 @@ the model, which will be removed from a model grid.}
 }
 \description{
 Removes an individual model specification from a model grid. If the model has
-been trained, the fitted model will also be swiped.
+been trained, the fitted model will also be deleted.
 }
 \examples{
 library(magrittr)

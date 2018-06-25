@@ -48,14 +48,14 @@ edit_model <- function(model_grid, model_name, ...) {
   # append new settings and/or changes to model.
   updated_model <- append(model_grid$models[[model_name]][keep_settings], new_settings)
 
-  # replace/overwrite existing model with updated model.
-  model_grid$models[[model_name]] <- updated_model
-
-  # delete model fit of existing model from model grid.
+  # delete model from model grid.
   if (exists(model_name, model_grid[["model_fits"]])) {
     model_grid <- remove_model(model_grid, model_name)
   }
-
+  
+  # replace with updated model.
+  model_grid$models[[model_name]] <- updated_model
+  
   # return model grid.
   model_grid
 

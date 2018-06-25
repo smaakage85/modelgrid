@@ -12,6 +12,8 @@
 #' across models in order to obtain a fair (and reproducible) comparison of
 #' the models. If set to NULL, seed will not be set (NOT advised).
 #'
+#' @return \code{model_grid} equipped with fitted models.
+#'
 #' @method train model_grid
 #' @export
 #'
@@ -76,7 +78,7 @@ train.model_grid <- function(mg, train_all = FALSE, resample_seed = 123) {
 
   # decide what models to train.
   if (length(models_without_fit) != 0 & !train_all) {
-    fit_models <-mg$models[models_without_fit]
+    fit_models <- mg$models[models_without_fit]
   } else {
     fit_models <- mg$models
   }

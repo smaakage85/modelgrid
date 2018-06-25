@@ -1,7 +1,7 @@
 #' Remove model from model grid
 #'
 #' Removes an individual model specification from a model grid. If the model has
-#' been trained, the fitted model will also be swiped.
+#' been trained, the fitted model will also be deleted.
 #'
 #' @param model_grid \code{model_grid}
 #' @param model_name \code{character}, the unique name (as set by the user) of
@@ -47,7 +47,7 @@ remove_model <- function(model_grid, model_name) {
   if (exists(model_name, model_grid[["model_fits"]])) {
     model_grid$model_fits <-
       subset(model_grid$model_fits, names(model_grid$model_fits) != model_name)
-    message("Model fit for ", model_name, " has been swiped.")
+    message("Model fit for ", model_name, " has been deleted.")
   }
 
   # return model grid.
