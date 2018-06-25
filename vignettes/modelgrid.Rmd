@@ -38,8 +38,8 @@ A tuning grid consists of combinations of hyperparameters for a specific model.
 A model grid is merely just an extension of that concept in the sense, that it
 consists of - potentially many - models, each with their own tuning grid. 
 Basically the model grid is built by providing a set of shared settings, that by
-default will apply to all models within the modelgrid, and settings for the
-individual models in the model grid.
+default will apply to all models within the model grid, and defining the settings
+for the individual models in the model grid.
 
 You can pre-allocate an empty model grid with the constructor function 
 `model_grid` and take a look at the structure.
@@ -51,18 +51,97 @@ mg <- model_grid()
 mg
 ```
 
-An object belonging to the`model_grid` class has three components:
+An object belonging to the `model_grid` class has three components:
 
-* `shared_settings`: these are the settings of. Obvious choices include
-the target variable, features and resampling scheme.
-* `models`: settings that uniquely identifies the indvidual models.
-* `model_fits`: contains the fitted models, once the `model_grid` has been trained.
+* `shared_settings`: these are the settings, that will be shared by all models 
+in the model grid by default. Generally it will make sense to fix some settings
+for all models, e.g. the choice target variable, features, resampling scheme
+and sometimes also preprocessing options. By providing them as shared settings
+the user avoids redundant code.
+* `models`: every individual model specification added to the model grid will be
+an element in this list. The individual model specification consists of settings
+that uniquely identify the indvidual model. If a setting has been set both as part
+of the shared settings and the settings of a given individual model specification,
+the setting from the individual model specification will apply for that given
+model.
+* `model_fits`: this element contains the fitted models (one for each individual
+model specification), once the `model_grid` has been trained.
 
-`modelgrid` support both the 'x', 'y' interface to train, the formula interface and last but
+## Creating a model grid
+
+The first natural step of setting up the model grid is to define, what settings that
+should be shared by all models by default. We will use the GermanCredit dataset
+from the caret package as example data and do just so with the `share_settings`
+function.
+
+```{r, message = FALSE}
+library(magrittr)
+library(caret)
+library(dplyr)
+library(purrr)
+# Load data on German credit applications.  
+data(GermanCredit)
+
+# Construct empty model grid and define shared settings.
+mg <-
+  model_grid() %>%
+  share_settings(
+    y = GermanCredit[["Class"]],
+    x = GermanCredit %>% select(-Class),
+    preProc = "nzv",
+    metric = "ROC",
+    trControl = trainControl(
+      method = "cv",
+      number = 10,
+      summaryFunction = twoClassSummary,
+      classProbs = TRUE
+    )
+  )
+
+purrr::map_chr(mg$shared_settings, class)
+```
+
+The `shared_settings` of the model grid are now populated. In order to complete
+the model grid we must define a set of individual model specifications, that
+we would like to give a shot. A common choice of baseline model could be
+a simple parametric model e.g. a Generalized Linear Model. The model specification
+is added to the model grid with the `add_model` function.
+
+```{r}
+mg <- 
+  mg %>%
+  add_model(model_name = "Logistic Regression Baseline",
+            method = "glm",
+            family = binomial(link = "logit"))
+
+mg$models
+```
+
+`model_grid` requires a (unique) name for each individual model specification, so I
+named this one "Logistic Regression Baseline". If the user does not provide a name,
+a generic name - "Model[int]" - is generated automatically. 
+
+
+
+
+
+
+s
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+`modelgrid` supports both the 'x', 'y' interface to train, the formula interface and last but
 not least the new powerful`recipes` interface.
-
-## caretList
-
-`caretList` is a flexible function for fitting many different caret models, with the same resampling parameters, to the same dataset.  It returns a convenient `list` of caret objects which can later be passed to `caretEnsemble` and `caretStack`.  `caretList` has almost exactly the same arguments as `train` (from the caret package), with the exception that the `trControl` argument comes last.  It can handle both the formula interface and the explicit `x`, `y` interface to train.  As in caret, the formula interface introduces some overhead and the `x`, `y` interface is preferred.
-
-`caretEnsemble` has 2 arguments that can be used to specify which models to fit: `methodList` and `tuneList`.  `methodList` is a simple character vector of methods that will be fit with the default `train` parameters, while `tuneList` can be used to customize the call to each component model and will be discussed in more detail later.  First, lets build an example dataset (adapted from the caret vignette):
