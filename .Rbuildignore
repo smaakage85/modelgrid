@@ -4,3 +4,4 @@
 ^appveyor\.yml$
 ^README\.md$
 ^README\.Rmd$
+^vignettes/modelgrid\.html$
