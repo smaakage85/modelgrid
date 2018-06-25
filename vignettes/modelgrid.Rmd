@@ -244,7 +244,6 @@ mg <- train(mg)
 names(mg$model_fits)
 
 # extract performance.
-library(lattice)
 mg$model_fits %>%
   caret::resamples(.) %>%
   summary(.)
@@ -349,7 +348,7 @@ the model grid with the `remove_model` function.
 ```{r}
 names(mg$models)
 
-# edit model configuration.
+# remove model configuration.
 mg <-
   mg %>%
   remove_model("Funky Forest")
