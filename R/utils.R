@@ -1,6 +1,12 @@
-#' @importFrom magrittr %>%
+#' Pipe operator
+#'
+#' @name %>%
+#' @rdname pipe
+#' @keywords internal
 #' @export
-magrittr::`%>%`
+#' @importFrom magrittr %>%
+#' @usage lhs \%>\% rhs
+NULL
 
 #' @importFrom caret train
 
