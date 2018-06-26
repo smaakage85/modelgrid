@@ -1,6 +1,6 @@
-#' Consolidate model settings to a complete caret model specification
+#' Consolidates model settings to a complete caret model specification
 #'
-#' Consolidate model (and model training) settings from shared and model specific
+#' Consolidates model (and model training) settings from shared and model specific
 #' settings to one complete caret model specification. In case there is an overlap
 #' between the two, the model specific settings will apply.
 #'
@@ -29,7 +29,7 @@
 #'             preProc = c("center", "scale", "pca"),
 #'             custom_control = list(preProcOptions = list(thresh = 0.8)))
 #'
-#' # consolidate all settings to complete caret model specification.
+#' # consolidates all settings to complete caret model specification.
 #' consolidate_model(mg$shared_settings, mg$models$FunkyForest)
 consolidate_model <- function(shared_settings, model) {
 

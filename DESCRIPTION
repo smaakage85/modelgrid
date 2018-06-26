@@ -24,6 +24,5 @@ Suggests: testthat,
     knitr,
     rmarkdown,
     recipes,
-    randomForest,
-    lattice
+    randomForest
 VignetteBuilder: knitr

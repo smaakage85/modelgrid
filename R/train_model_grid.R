@@ -24,7 +24,7 @@
 #' library(dplyr)
 #' data(GermanCredit)
 #'
-#' # Create model grid with RF and XGB models.
+#' # Creates model grid with RF and XGB models.
 #' mg <-
 #'   model_grid() %>%
 #'   share_settings(
@@ -56,13 +56,13 @@
 #'     custom_control = list(preProcOptions = list(pcaComp = 20))
 #'   )
 #'
-#' # Train all model configurations in model grid.
+#' # Trains all model configurations in model grid.
 #' train(mg)
 #' }
 #' @rdname model_grid
 train.model_grid <- function(mg, train_all = FALSE, resample_seed = 123) {
 
-  # check inputs.
+  # checks inputs.
   if (length(mg$models) == 0) {
     stop("No models to train.")
   }
@@ -70,31 +70,31 @@ train.model_grid <- function(mg, train_all = FALSE, resample_seed = 123) {
   # identify models without corresponding fits.
   models_without_fit <- dplyr::setdiff(names(mg$models), names(mg$model_fits))
 
-  # stop, if all models already have been equipped with a fit.
+  # stops, if all models already have been equipped with a fit.
   if (length(models_without_fit) == 0 & !train_all) {
     stop("It seems all models have already been trained. If you want to ",
          "train all of the models regardless, set train_all to TRUE.")
   }
 
-  # decide what models to train.
+  # decides what models to train.
   if (length(models_without_fit) != 0 & !train_all) {
     fit_models <- mg$models[models_without_fit]
   } else {
     fit_models <- mg$models
   }
 
-  # consolidate and train models from model grid.
+  # consolidates and train models from model grid.
   models_trained <-
     fit_models %>%
     purrr::map2(.x = ., .y = names(.), purrr::safely(.f = function(.x, .y) {
       complete_model <- consolidate_model(mg$shared_settings, .x)
       message(paste0("[", Sys.time(),"] Training of '", .y, "' started."))
-      # set seed before training to ensure the same resamples are used for all models.
+      # sets seed before training to ensure the same resamples are used for all models.
       if (!is.null(resample_seed)) {set.seed(resample_seed)}
-      # train model.
+      # trains model.
       model <- do.call(caret::train, complete_model)
       message(paste0("[", Sys.time(),"] Training of '", .y, "' completed."))
-      # return trained model.
+      # returns trained model.
       model
     }))
 
@@ -106,7 +106,7 @@ train.model_grid <- function(mg, train_all = FALSE, resample_seed = 123) {
     magrittr::extract2("error") %>%
     purrr::map_lgl(is.null)
 
-  # throw warning, if that is the case.
+  # throws warning, if that is the case.
   if (any(!is_ok)) warning("One or more models threw errors :(! For this reason the fitted models are ",
                            "saved with both a 'result' and an 'error' component. \n \nAre you sure, all ",
                            "inputs are valid? \n\nThe following models were not trained succesfully: \n\n",
@@ -115,19 +115,19 @@ train.model_grid <- function(mg, train_all = FALSE, resample_seed = 123) {
   # if all models are ok, only return 'result' component.
   if (all(is_ok)) {models_trained <- purrr::map(models_trained, "result")}
 
-  # add trained models to model grid.
+  # adds trained models to model grid.
   if(identical(fit_models, mg$models)) {
-    # in case, that all models have been trained, insert all models.
+    # in case, that all models have been trained, inserts all models.
     mg$model_fits <- models_trained
   } else {
-    # if only a subset of the models have been trained, append only these model fits.
+    # if only a subset of the models have been trained, appends only these model fits.
     mg$model_fits <- append(mg$model_fits, models_trained)
   }
 
-  # sort trained models in lexicographical order by their names.
+  # sorts trained models in lexicographical order by their names.
   mg$model_fits <- mg$model_fits[sort(names(mg$model_fits))]
 
-  # return model grid.
+  # returns model grid.
   mg
 
 }

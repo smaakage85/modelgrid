@@ -54,7 +54,7 @@ mg
 An object belonging to the `model_grid` class has three components:
 
 * `shared_settings`: these are the settings, that will be shared by all models 
-in the model grid by default. Generally it will make sense to fix some settings
+in the model grid by default. Generally, it makes sense to fix some settings
 for all models, e.g. the choice target variable, features, resampling scheme
 and sometimes also preprocessing options. By providing them as shared settings
 the user avoids redundant code.
@@ -69,7 +69,7 @@ model specification), once the `model_grid` has been trained.
 
 ## Creating a model grid
 
-The first natural step of setting up the model grid is to define, what settings that
+The first natural step of setting up the model grid is to define, which settings 
 should be shared by all models by default. We will use the GermanCredit data set
 from the caret package as example data and do just that with the `share_settings`
 function.
@@ -79,10 +79,10 @@ library(magrittr)
 library(caret)
 library(dplyr)
 library(purrr)
-# Load data on German credit applications.  
+# Loads data on German credit applications.  
 data(GermanCredit)
 
-# Construct empty model grid and define shared settings.
+# Constructs empty model grid and define shared settings.
 mg <-
   model_grid() %>%
   share_settings(
@@ -122,7 +122,7 @@ named this one "Logistic Regression Baseline". If the user does not provide a na
 a generic name - 'Model[int]' - is generated automatically. 
 
 This is all it takes to create the smallest possible model grid with only one unique
-model configuration. The model grid can be trained with the `train` function, for
+model configuration. The model grid can be trained with the `train` function. For
 more on this go to 'Training a model grid'.
 
 But a model grid with only one model specification is obviously not a really interesting
@@ -172,7 +172,7 @@ be appended into one configuration.
 # there are no conflicts.
 dplyr::intersect(names(mg$shared_settings), names(mg$models$`Logistic Regression Baseline`))
 
-# consolidate model settings into one model.
+# consolidates model settings into one model.
 consolidate_model(
   mg$shared_settings, 
   mg$models$`Logistic Regression Baseline`
@@ -193,7 +193,7 @@ dplyr::intersect(names(mg$shared_settings), names(mg$models$`Logistic Regression
 mg$shared_settings$preProc
 mg$models$`Logistic Regression PCA`$preProc
 
-# consolidate model settings into one model.
+# consolidates model settings into one model.
 consolidate_model(
   mg$shared_settings, 
   mg$models$`Logistic Regression PCA`
@@ -218,7 +218,7 @@ apply.
 mg$shared_settings$trControl$preProcOptions$thresh
 mg$models$`Logistic Regression PCA 98e-2`$custom_control$preProcOptions$thresh
 
-# consolidate model settings into one model.
+# consolidates model settings into one model.
 consolidate_model(
   mg$shared_settings, 
   mg$models$`Logistic Regression PCA 98e-2`
@@ -237,13 +237,13 @@ Afterwards the models are trained one by one with `caret`, and the fitted
 models are saved in the `model_fits` component of the model grid.
 
 ```{r, message = FALSE, warning = FALSE}
-# train models from model grid.
+# trains models from model grid.
 mg <- train(mg)
 
 # the fitted models now appear in the 'model_fits' component.
 names(mg$model_fits)
 
-# extract performance.
+# extracts performance.
 mg$model_fits %>%
   caret::resamples(.) %>%
   summary(.)
@@ -254,7 +254,7 @@ grid again, only the new models (those that do not yet have a fit) will be train
 by default. 
 
 ```{r, warning = FALSE}
-# train models from model grid.
+# trains models from model grid.
 mg <- 
   mg %>%
   add_model(model_name = "Funky Forest",
@@ -274,7 +274,7 @@ the formula interface and last but not least the new powerful 'recipe' interface
 Let us try out the latter. First we will create a basic recipe.
 
 ```{r, message = FALSE}
-# create base recipe.
+# creates base recipe.
 library(recipes)
 rec <- 
   recipe(GermanCredit, formula = Class ~ .) %>%
@@ -330,7 +330,7 @@ I use it to modify one of the GLM models.
 # existing model configuration.
 mg$models$`Logistic Regression PCA`
 
-# edit model configuration.
+# edits model configuration.
 mg <-
   mg %>%
   edit_model(model_name = "Logistic Regression PCA",
@@ -348,7 +348,7 @@ the model grid with the `remove_model` function.
 ```{r}
 names(mg$models)
 
-# remove model configuration.
+# removes model configuration.
 mg <-
   mg %>%
   remove_model("Funky Forest")
