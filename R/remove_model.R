@@ -1,4 +1,4 @@
-#' Remove model from model grid
+#' Removes model from model grid
 #'
 #' Removes an individual model specification from a model grid. If the model has
 #' been trained, the fitted model will also be deleted.
@@ -13,19 +13,19 @@
 #' @examples
 #' library(magrittr)
 #'
-#' # Pre-allocate empty model grid.
+#' # Pre-allocates empty model grid.
 #' mg <- model_grid()
 #'
-#' # Add random forest model.
+#' # Adds random forest model.
 #' mg <-
 #'   mg %>%
 #'   add_model(model_name = "Random Forest Test", method = "rf", tuneLength = 5)
 #'
-#' # Remove random forest model again.
+#' # Removes random forest model again.
 #' remove_model(mg, model_name = "Random Forest Test")
 remove_model <- function(model_grid, model_name) {
 
-  # check inputs.
+  # checks inputs.
   if (!inherits(model_grid, "model_grid")) {
     stop("The 'model_grid' must inherit from the 'model_grid' class.")
   }
@@ -34,23 +34,23 @@ remove_model <- function(model_grid, model_name) {
     stop("no model specifications have been defined within the model grid.")
     }
 
-  # check if a model with that name exists in the model grid.
+  # checks if a model with that name exists in the model grid.
   if (!(exists(model_name, model_grid[["models"]]))) {
     stop("there is no model with that name in the model_grid.")
   }
 
-  # delete model specification.
+  # deletes model specification.
   model_grid$models <-
     subset(model_grid$models, names(model_grid$models) != model_name)
 
-  # delete any existing model fit.
+  # deletes any existing model fit.
   if (exists(model_name, model_grid[["model_fits"]])) {
     model_grid$model_fits <-
       subset(model_grid$model_fits, names(model_grid$model_fits) != model_name)
     message("Model fit for ", model_name, " has been deleted.")
   }
 
-  # return model grid.
+  # returns model grid.
   model_grid
 
 }

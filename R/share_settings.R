@@ -1,6 +1,6 @@
-#' Set shared settings of a model grid
+#' Sets shared settings of a model grid
 #'
-#' Set shared settings for all model (and training) configurations within a
+#' Sets shared settings for all model (and training) configurations within a
 #' model grid. These settings will apply for any given model, unless the same
 #' settings have already been specified in the model specific configurations. In
 #' that case, the model specific settings will apply.
@@ -17,7 +17,7 @@
 #' library(dplyr)
 #' data(GermanCredit)
 #'
-#' # Pre-allocate empty model grid.
+#' # Pre-allocates empty model grid.
 #' models <- model_grid()
 #'
 #' # Set shared settings of model grid.
@@ -36,7 +36,7 @@
 #'   )
 share_settings <- function(model_grid, ...) {
 
-  # check inputs.
+  # checks inputs.
   if (!inherits(model_grid, "model_grid")) {
     stop("The 'model_grid' must inherit from the 'model_grid' class.")
   }
@@ -55,15 +55,15 @@ share_settings <- function(model_grid, ...) {
     model_grid$model_fits <- list()
     message("All model fits have been swiped due to shared settings being updated.")
   }
-  # check validity of method (if provided).
+  # checks validity of method (if provided).
   if ("method" %in% names(list(...)) && !(list(...)[["method"]] %in% caret::modelLookup()$model)) {
     stop("'method' is not supported by this version of caret.")
   }
 
-  # set shared settings of the model grid.
+  # sets shared settings of the model grid.
   model_grid[["shared_settings"]] <- list(...)
 
-  # return model grid with updated shared settings.
+  # returns model grid with updated shared settings.
   model_grid
 
 }
