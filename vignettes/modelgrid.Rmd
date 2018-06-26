@@ -2,7 +2,7 @@
 title: "Introduction to modelgrid"
 author: "Lars Kjeldgaard"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Introduction to modelgrid}
   %\VignetteEngine{knitr::rmarkdown}
@@ -19,15 +19,15 @@ very flexible framework to create, manage and train a portfolio of caret models.
 Note, you should already be fairly familiar with the caret package before giving
 `modelgrid` a spin.
 
-This is the first official release, so below I describe the [key concept](#key_concept)
+This is the first official release, so below I describe the key concept
 behind `modelgrid` as well as the features of `modelgrid` divided into three main 
 categories:
 
-* [Creating a model grid](#creating_a_model_grid)
-* [Training a model grid](#traning_a_model_grid)
-* [Editing and removing models from a model grid](#editing_removing_models)
+* Creating a model grid
+* Training a model grid
+* Editing and removing models from a model grid
 
-## Key concept behind the model grid {#key_concept}
+## Key concept behind the model grid
 When facing a Machine Learning problem, you typically want to try out a lot of
 models in order to find out, what works and what does not. But how can we manage 
 these experiments in a structured, simple and transparent way? You guessed it - 
@@ -67,7 +67,7 @@ model.
 * `model_fits`: this element contains the fitted models (one for each individual
 model specification), once the `model_grid` has been trained.
 
-## Creating a model grid {#creating_a_model_grid}
+## Creating a model grid
 
 The first natural step of setting up the model grid is to define, what settings that
 should be shared by all models by default. We will use the GermanCredit data set
@@ -119,11 +119,11 @@ mg$models
 
 `model_grid` requires a (unique) name for each individual model specification, so I
 named this one "Logistic Regression Baseline". If the user does not provide a name,
-a generic name - "Model[int]" - is generated automatically. 
+a generic name - 'Model[int]' - is generated automatically. 
 
 This is all it takes to create the smallest possible model grid with only one unique
 model configuration. The model grid can be trained with the `train` function, for
-more on this go to [Training a model grid](#training_a_model_grid).
+more on this go to 'Training a model grid'.
 
 But a model grid with only one model specification is obviously not a really interesting
 use case. Let us insert two more model specifications into the model grid: another two
@@ -149,18 +149,18 @@ mg$models
 You can of course add as many models as you like to the model grid with
 the `add_model` function. 
 
-## Training a model grid {#training_a_model_grid}
+## Training a model grid
 
 The models from a model grid can be trained with the `train` function 
 from the `caret` package, for which I have implemented a S3 method for the
 `model_grid` class.
 
 When you call `train` with a `model_grid`, all of the individual model
-specifications are [consolidated](#consolidation) with the shared settings into complete
-caret model specifications, which are then [trained](#train) one by one with
+specifications are consolidated with the shared settings into complete
+caret model specifications, which are then trained one by one with
 caret.
 
-### Consolidation of settings into complete caret model specifications {#consolidation}
+### Consolidation of settings into complete caret model specifications
 
 For a given model the model settings are consolidated with the
 `consolidate_model` function. Let us see how this works with the three models.
@@ -182,7 +182,7 @@ consolidate_model(
 
 In case the same setting has been specified both in the shared settings of the
 model grid and in the individual settings for a specific model, the individual
-setting will apply. This is the case for the model "Logistic Regression PCA", 
+setting will apply. This is the case for the model 'Logistic Regression PCA', 
 where the 'preProc' argument has also been defined in the model specific
 configuration.
 
@@ -206,7 +206,7 @@ subsettings of 'trControl' can be modified for a specific model with the special
 setting 'custom_control' (which itself is given as an explicit argument to the 
 `add_model` function) in the model specific settings.
 
-For the model `Logistic Regression PCA 98e-1`, the preprocessing options for PCA
+For the model 'Logistic Regression PCA 98e-2', the preprocessing options for PCA
 were adjusted with 'custom_control'. When the model is consolidated, the model 
 specific customizations of subsettings of the shared 'trControl' argument will
 apply.
@@ -226,7 +226,7 @@ consolidate_model(
   magrittr::extract2(c("trControl", "preProcOptions", "thresh"))
 ```
 
-### Model training {#train}
+### Model training
 
 When calling the `train` function, the `consolidate_model` function is called
 under the hood with all of the individual models and the shared settings, and
@@ -271,7 +271,7 @@ be trained regardless.
 
 The training of a `model_grid` supports both the explicit 'x', 'y' interface to train, 
 the formula interface and last but not least the new powerful 'recipe' interface.
-Let us try out the latter. First we will create a base recipe.
+Let us try out the latter. First we will create a basic recipe.
 
 ```{r, message = FALSE}
 # create base recipe.
@@ -319,7 +319,7 @@ mg_rec$model_fits %>%
   summary(.)
 ```
 
-## Editing and removing models {#editing_removing_models}
+## Editing and removing models
 
 `modelgrid` has a couple of functions, that makes it easy to work iteratively
 with the model specifications in a model grid. If you want to modify an
@@ -340,7 +340,7 @@ mg$models$`Logistic Regression PCA`
 ```
 
 As you see, when you modify an existing model specification, any corresponding
-fitted model is deleted
+fitted model is deleted, so that nothing is out of sync.
 
 You can also remove a model specification (including any fitted model) from 
 the model grid with the `remove_model` function.
@@ -355,11 +355,3 @@ mg <-
 
 names(mg$models)
 ```
-
-
-
-
-
-
-
-
