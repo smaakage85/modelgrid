@@ -105,6 +105,7 @@ mg <- train(mg)
 Visualize performance statistics of final models.
 
 ```{r performance_bwplot}
+library(lattice)
 mg$model_fits %>%
   resamples(.) %>%
   bwplot(.)
