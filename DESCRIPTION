@@ -9,7 +9,7 @@ Description: A minimalistic but flexible framework that facilitates the creation
     grid is trained, model and training specifications are first consolidated
     from the shared and the model specific settings into complete caret model
     configurations. These configurations are then trained with the famous 
-    train function from the caret package.
+    train function from the Caret package.
 URL: https://github.com/smaakage85/modelgrid
 Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
