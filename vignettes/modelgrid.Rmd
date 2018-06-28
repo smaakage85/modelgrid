@@ -32,7 +32,8 @@ When facing a Machine Learning problem, you typically want to try out a lot of
 models in order to find out, what works and what does not. But how can we manage 
 these experiments in a structured, simple and transparent way? You guessed it - 
 by using the `modelgrid` package (and yes, I am familiar with the `caretEnsemble`
-package, but it was not exactly, what I was looking for). 
+package, but I wanted something, that was more flexible and easier/more intuitive
+to work with). 
 
 A tuning grid consists of combinations of hyperparameters for a specific model. 
 A model grid is merely just an extension of that concept in the sense, that it

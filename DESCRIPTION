@@ -11,7 +11,7 @@ Description: A minimalistic but flexible framework that facilitates the creation
     configurations. These configurations are then trained with the famous 
     train function from the caret package.
 URL: https://github.com/smaakage85/modelgrid
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.4.3)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -19,6 +19,7 @@ Imports: caret,
     purrr,
     dplyr,
     magrittr,
+    ggplot2,
     lattice,
     stringi
 RoxygenNote: 6.0.1
