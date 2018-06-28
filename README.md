@@ -28,13 +28,13 @@ mg <- model_grid()
 
 mg
 #> $shared_settings
-#> NULL
+#> list()
 #> 
 #> $models
-#> NULL
+#> list()
 #> 
 #> $model_fits
-#> NULL
+#> list()
 #> 
 #> attr(,"class")
 #> [1] "model_grid"
@@ -43,13 +43,14 @@ mg
 As you see, a `model_grid` has three components:
 
 -   `shared_settings`: settings to be shared across models. Obvious choices include the target variable, features and resampling scheme.
--   `models`: settings that uniquely identifies the indvidual models.
--   `model_fits`: holds the fitted models, once the `model_grid` has been trained.
+-   `models`: settings that uniquely identify the indvidual models.
+-   `model_fits`: contains the fitted models, once the `model_grid` has been trained.
 
 Next, decide what settings you want to be shared by the models constituting the `model_grid`.
 
 ``` r
 library(dplyr)
+library(lattice)
 library(caret)
 data(GermanCredit)
 

@@ -53,6 +53,7 @@ Next, decide what settings you want to be shared by the models constituting the
 
 ```{r, message = FALSE}
 library(dplyr)
+library(lattice)
 library(caret)
 data(GermanCredit)
 
@@ -105,7 +106,6 @@ mg <- train(mg)
 Visualize performance statistics of final models.
 
 ```{r performance_bwplot}
-library(lattice)
 mg$model_fits %>%
   resamples(.) %>%
   bwplot(.)

@@ -18,12 +18,13 @@ LazyData: true
 Imports: caret,
     purrr,
     dplyr,
-    magrittr
+    magrittr,
+    lattice,
+    stringi
 RoxygenNote: 6.0.1
 Suggests: testthat,
     knitr,
     rmarkdown,
     recipes,
-    randomForest,
-    lattice
+    randomForest
 VignetteBuilder: knitr
