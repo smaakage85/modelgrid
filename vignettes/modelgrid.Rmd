@@ -2,7 +2,7 @@
 title: "Introduction to modelgrid"
 author: "Lars Kjeldgaard"
 date: "`r Sys.Date()`"
-output: pdf_document
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to modelgrid}
   %\VignetteEngine{knitr::rmarkdown}
@@ -55,8 +55,8 @@ mg
 An object belonging to the `model_grid` class has three components:
 
 * `shared_settings`: these are the settings, that will be shared by all models 
-in the model grid by default. Generally it will make sense to fix some settings
-for all models, e.g. the choice target variable, features, resampling scheme
+in the model grid by default. Generally it will make sense to keep some settings
+fixed for all models, e.g. the choice of target variable, features, resampling scheme
 and sometimes also preprocessing options. By providing them as shared settings
 the user avoids redundant code.
 * `models`: every individual model specification added to the model grid will be
