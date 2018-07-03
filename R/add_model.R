@@ -7,7 +7,7 @@
 #' @param model_name \code{character}, your custom name for a given model. Must be
 #' unique within the model grid. If you do not provide a name, the model will be
 #' given a generic name - 'Model[int]'.
-#' @param custom_control \code{list}, any customizations to subsettings of the 'trControl'
+#' @param custom_control \code{list}, any customization to subsettings of the 'trControl'
 #' component from the 'shared_settings' of the model grid (will only work if
 #' trControl' parameter has actually been set as part of the shared settings).
 #' @param ... All (optional) individual settings (including model training settings)

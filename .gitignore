@@ -2,5 +2,4 @@
 .Rhistory
 .RData
 *.Rproj
-inst/doc
 vignettes/modelgrid.html

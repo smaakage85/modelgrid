@@ -13,7 +13,7 @@ add_model(model_grid, model_name = NULL, custom_control = NULL, ...)
 unique within the model grid. If you do not provide a name, the model will be
 given a generic name - 'Model[int]'.}
 
-\item{custom_control}{\code{list}, any customizations to subsettings of the 'trControl'
+\item{custom_control}{\code{list}, any customization to subsettings of the 'trControl'
 component from the 'shared_settings' of the model grid (will only work if
 trControl' parameter has actually been set as part of the shared settings).}
 

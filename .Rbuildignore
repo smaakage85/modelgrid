@@ -5,3 +5,4 @@
 ^README\.md$
 ^README\.Rmd$
 ^vignettes/modelgrid\.html$
+inst/doc

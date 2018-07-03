@@ -29,6 +29,6 @@ mg <-
   model_grid() \%>\%
   add_model(model_name = "Random Forest Test", method = "rf", tuneLength = 5)
 
-# Edit size of tuning grid of the random forest model.
+# Edit the size of tuning grid of the random forest model.
 edit_model(mg, model_name = "Random Forest Test", tuneLength = 10)
 }

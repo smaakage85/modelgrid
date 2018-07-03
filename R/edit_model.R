@@ -20,7 +20,7 @@
 #'   model_grid() %>%
 #'   add_model(model_name = "Random Forest Test", method = "rf", tuneLength = 5)
 #'
-#' # Edit size of tuning grid of the random forest model.
+#' # Edit the size of tuning grid of the random forest model.
 #' edit_model(mg, model_name = "Random Forest Test", tuneLength = 10)
 edit_model <- function(model_grid, model_name, ...) {
 
@@ -39,7 +39,7 @@ edit_model <- function(model_grid, model_name, ...) {
     stop("'method' is not supported by this version of caret.")
   }
 
-  # create list wist settings to be updated.
+  # create list with settings that will be updated.
   new_settings  <- list(...)
 
   # keep unchanged settings from existing model.
@@ -52,10 +52,10 @@ edit_model <- function(model_grid, model_name, ...) {
   if (exists(model_name, model_grid[["model_fits"]])) {
     model_grid <- remove_model(model_grid, model_name)
   }
-  
+
   # replace with updated model.
   model_grid$models[[model_name]] <- updated_model
-  
+
   # return model grid.
   model_grid
 
