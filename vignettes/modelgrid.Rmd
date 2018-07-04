@@ -14,7 +14,7 @@ library(magrittr)
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
-modelgrid 0.9.0 is now available on CRAN. modelgrid offers a minimalistic but 
+modelgrid 1.0.0.0 is now available on CRAN. modelgrid offers a minimalistic but 
 very flexible framework to create, manage and train a portfolio of caret models.
 Note, you should already be fairly familiar with the caret package before giving
 `modelgrid` a spin.
