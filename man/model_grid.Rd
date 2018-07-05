@@ -41,43 +41,37 @@ trains them with the train function from the caret package.
 # Pre-allocate an empty model grid.
 model_grid()
 
-\dontrun{
+\donttest{
 library(caret)
 library(magrittr)
 library(dplyr)
 data(GermanCredit)
 
-# Create model grid with RF and XGB models.
+# Create model grid with two different Random Forest models.
 mg <-
   model_grid() \%>\%
   share_settings(
     y = GermanCredit[["Class"]],
     x = GermanCredit \%>\% select(-Class),
     metric = "ROC",
-    preProc = c("nzv", "center", "scale", "pca"),
     trControl = trainControl(
       method = "cv",
-      number = 5,
+      number = 2,
       summaryFunction = twoClassSummary,
       classProbs = TRUE
     )
   ) \%>\%
   add_model(
-    model_name = "Funky Forest",
+    model_name = "RF",
     method = "rf",
-    tuneLength = 5,
-    preProc = c("center", "scale")
+    tuneLength = 3
     ) \%>\%
   add_model(
-    model_name = "Big Boost",
-    method = "xgbTree",
-    nthread = 8
-    ) \%>\%
-  add_model(
-    model_name = "Big Boost PCA_20",
-    method = "xgbTree",
-    custom_control = list(preProcOptions = list(pcaComp = 20))
-  )
+    model_name = "RF NZV",
+    method = "rf",
+    preProc = "nzv",
+    tuneGrid = data.frame(mtry = c(2, 10))
+    )
 
 # Train all model configurations in model grid.
 train(mg)
