@@ -4,13 +4,14 @@ modelgrid <img src="man/figures/mglogo.png" align="right" />
 ============================================================
 
 [![Travis-CI Build Status](https://travis-ci.org/smaakage85/modelgrid.svg?branch=master)](https://travis-ci.org/smaakage85/modelgrid) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/smaakage85/modelgrid?branch=master&svg=true)](https://ci.appveyor.com/project/smaakage85/modelgrid)
+[![CRAN\_Release\_Badge](http://www.r-pkg.org/badges/version-ago/modelgrid)](https://CRAN.R-project.org/package=modelgrid) [![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/modelgrid)](https://CRAN.R-project.org/package=modelgrid)
 
 This is a small package offering a minimalistic but flexible framework for creating, managing and training multiple caret models with a bare minimum of code.
 
 Installation
 ------------
 
-`modelgrid` can be installed from CRAN with ~~`install.packages('modelgrid')`~~ (soon). If you want the development version then install directly from GitHub:
+`modelgrid` can be installed from CRAN with `install.packages('modelgrid')`. If you want the development version then install directly from GitHub:
 
 ``` r
 # install.packages("devtools")

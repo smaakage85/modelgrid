@@ -22,7 +22,7 @@ creating, managing and training multiple caret models with a bare minimum of cod
 
 ## Installation
 
-`modelgrid` can be installed from CRAN with ~~`install.packages('modelgrid')`~~ (soon). 
+`modelgrid` can be installed from CRAN with `install.packages('modelgrid')`. 
 If you want the development version then install directly from GitHub:
 
 ```{r, eval = FALSE}
