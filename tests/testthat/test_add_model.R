@@ -11,18 +11,6 @@ test_that("the addition of two model configuration(s) to model grid is as expect
                  names(.))
 })
 
-test_that("error occurs, when model type is not supported by caret", {
-
-  # single setting.
-  expect_error(model_grid() %>%
-                 add_model(method = "bogus"))
-
-  # multiple settings.
-  expect_error(model_grid() %>%
-                 add_model(method = "bogus",
-                           tuneLength = 10))
-})
-
 test_that("the automatic naming of models does not cause any trouble", {
   expect_equal(c("Model0", "Model1"),
                model_grid() %>%
