@@ -34,11 +34,6 @@ edit_model <- function(model_grid, model_name, ...) {
     stop("There is no model with that name within the model grid.")
   }
 
-  # check 'method' (if provided).
-  if (exists("method", list(...)) && !(list(...)[["method"]] %in% caret::modelLookup()$model)) {
-    stop("'method' is not supported by this version of caret.")
-  }
-
   # create list with settings that will be updated.
   new_settings  <- list(...)
 

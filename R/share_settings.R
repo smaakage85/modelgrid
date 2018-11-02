@@ -53,13 +53,9 @@ share_settings <- function(model_grid, ...) {
 
   if (length(model_grid$model_fits) != 0) {
     model_grid$model_fits <- list()
-    message("All model fits have been swiped due to shared settings being updated.")
+    message("All model fits have been deleted due to shared settings being updated.")
   }
-  # check validity of method (if provided).
-  if ("method" %in% names(list(...)) && !(list(...)[["method"]] %in% caret::modelLookup()$model)) {
-    stop("'method' is not supported by this version of caret.")
-  }
-
+  
   # set shared settings of the model grid.
   model_grid[["shared_settings"]] <- list(...)
 
