@@ -1,9 +1,9 @@
-## Resubmission
-This is a resubmission. In this version I have:
+## Package update
+This is an updated version of 'modelgrid'.
 
-* Written package names, software names and API names in
-single quotes (e.g. 'caret') in Description.
-* Replaced \dontrun{} by \donttest{} in Rd-files. 
+In this version I have:
+
+* enabled support for custom 'caret' model interfaces.
 
 ## R CMD check results
 0 errors | 0 warnings | 0 notes
